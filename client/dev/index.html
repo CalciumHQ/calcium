@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <base href="/" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="shortcut icon" type="image/ico" href="favicon.png" />
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <title>Calcium</title>
+  </head>
+  <body>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Scratchpad</h1>
+        <p>Test out the calculatory caramel of Calcium!</p>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <scratchpad-cmp></scratchpad-cmp>
+        </div>
+      </div>
+    </div>
+
+    <script src="node_modules/systemjs/dist/system.js?rev=@@hash"></script>
+    <script>
+      System.config({
+                      defaultJSExtensions: true
+                    });
+    </script>
+    <script src="node_modules/rxjs/bundles/Rx.js?rev=@@hash"></script>
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js?rev=@@hash"></script>
+    <script src="node_modules/angular2/bundles/angular2.js?rev=@@hash"></script>
+    <script src="node_modules/angular2/bundles/http.js?rev=@@hash"></script>
+    <script src="node_modules/angular2/bundles/router.js?rev=@@hash"></script>
+
+    <script>
+      System.import("client/dev/index.js");
+    </script>
+
+  </body>
+</html>
