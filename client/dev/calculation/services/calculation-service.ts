@@ -23,8 +23,11 @@ export class CalculationService {
 
   }
 
-  calculate(values:Object):Observable<any> {
-    let _stringified = JSON.stringify({values: values});
+  calculate(values:Object, expression:string):Observable<any> {
+    let _stringified = JSON.stringify({
+      expression: expression,
+      values: values
+    });
 
     let headers = new Headers();
 

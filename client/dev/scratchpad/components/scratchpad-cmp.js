@@ -22,6 +22,7 @@ var ScratchpadCmp = (function () {
             message: ''
         };
         this.scratchpadForm = fb.group({
+            "expression": ["", common_1.Validators.required],
             "x": ["", common_1.Validators.required],
             "y": ["", common_1.Validators.required]
         });
@@ -29,7 +30,10 @@ var ScratchpadCmp = (function () {
     ScratchpadCmp.prototype.calculate = function (expression, x) {
         var _this = this;
         this._calculateService
-            .calculate(this.scratchpadForm.value)
+            .calculate({
+            x: this.scratchpadForm.value.x,
+            y: this.scratchpadForm.value.y
+        }, this.scratchpadForm.value.expression)
             .subscribe(function (result) {
             _this.output.status = result.status;
             _this.output.message = JSON.stringify(result.values);

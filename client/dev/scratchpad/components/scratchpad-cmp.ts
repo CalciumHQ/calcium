@@ -30,6 +30,7 @@ export class ScratchpadCmp {
   constructor(@Inject(FormBuilder) fb:FormBuilder, @Inject(CalculationService) private _calculateService: CalculationService) {
     
     this.scratchpadForm = fb.group({
+      "expression": ["", Validators.required],
       "x": ["", Validators.required],
       "y": ["", Validators.required]
     });
@@ -38,7 +39,10 @@ export class ScratchpadCmp {
   public calculate(expression: string, x: string) {
     
     this._calculateService
-        .calculate(this.scratchpadForm.value)
+        .calculate({
+          x: this.scratchpadForm.value.x,
+          y: this.scratchpadForm.value.y
+        }, this.scratchpadForm.value.expression)
         .subscribe((result) => {
           this.output.status = result.status;
           this.output.message = JSON.stringify(result.values);
