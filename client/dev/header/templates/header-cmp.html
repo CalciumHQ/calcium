@@ -1,0 +1,12 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a [routerLink]="['Home']" class="navbar-brand">Calcium</a>
+    </div>
+    
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="!user"><a [routerLink]="['Login']">Login</a></li>
+      <li *ngIf="user"><a>{{ user.firstName }} {{ user.lastName }}</a></li>
+    </ul>
+  </div>
+</nav>

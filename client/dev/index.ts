@@ -2,7 +2,8 @@
 
 import {bootstrap} from 'angular2/platform/browser';
 import {HTTP_PROVIDERS} from 'angular2/http';
+import {ROUTER_PROVIDERS} from 'angular2/router';
 
-import {ScratchpadCmp} from './scratchpad/components/scratchpad-cmp';
+import {ApplicationCmp} from './application/components/application-cmp';
 
-bootstrap(ScratchpadCmp, [HTTP_PROVIDERS]);
+bootstrap(ApplicationCmp, [HTTP_PROVIDERS, ROUTER_PROVIDERS]);

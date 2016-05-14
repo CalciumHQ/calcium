@@ -9,6 +9,7 @@ import * as express from 'express';
 import * as os from 'os';
 import * as http from 'http';
 import {RoutesConfig} from './config/routes.conf';
+import {AuthConfig} from './config/auth.conf';
 import {DBConfig} from './config/db.conf';
 import {Routes} from './routes/index';
 
@@ -16,6 +17,7 @@ const app = express();
 
 RoutesConfig.init(app);
 DBConfig.init();
+AuthConfig.init(app);
 Routes.init(app, express.Router());
 
 http.createServer(app)
