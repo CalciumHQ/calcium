@@ -1,15 +1,19 @@
 <div class="container">
-  <form class="login-form" [ngFormModel]="loginForm" (submit)="login()">
-    <div class="form-group">
-      <label for="">Email address</label>
-      <input ngControl="email" type="email" placeholder="lillian@calcium.com" class="form-control" (keyup)="0">  
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form class="login-form" [ngFormModel]="loginForm" (submit)="login()">
+        <div class="form-group">
+          <label for="">Email address</label>
+          <input ngControl="email" type="email" placeholder="lillian@calcium.com" class="form-control" (keyup)="0">  
+        </div>
+        
+        <div class="form-group">
+          <label for="">Password</label>
+          <input ngControl="password" type="password" class="form-control" (keyup)="0">  
+        </div>
+        
+        <button type="submit" class="btn btn-default">Login</button>
+      </form>
     </div>
-    
-    <div class="form-group">
-      <label for="">Password</label>
-      <input ngControl="password" type="password" class="form-control" (keyup)="0">  
-    </div>
-    
-    <button type="submit" class="btn btn-default">Login</button>
-  </form>
- </div>
+  </div>
+</div>

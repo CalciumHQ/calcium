@@ -11,7 +11,6 @@ import {AuthService} from 'client/dev/auth/services/auth-service';
 @Component({
   selector: 'header-cmp',
   directives: [RouterLink],
-  providers: [AuthService],
   templateUrl: 'client/dev/header/templates/header-cmp.html'
 })
 export class HeaderCmp implements OnInit {
@@ -24,11 +23,14 @@ export class HeaderCmp implements OnInit {
   
   ngOnInit() {
     
+    this._authService.currentUser
+        .subscribe((u) => this.user = u); 
+  }
+  
+  logout() {
+    
     this._authService
-        .getCurrentUser()
-        .subscribe(user => {
-          
-          this.user = user;
-        });
+        .logout()
+        .subscribe();
   }
 }

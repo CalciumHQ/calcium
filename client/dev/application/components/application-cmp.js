@@ -13,6 +13,7 @@ var router_1 = require('angular2/router');
 var header_cmp_1 = require('client/dev/header/components/header-cmp');
 var scratchpad_cmp_1 = require('client/dev/scratchpad/components/scratchpad-cmp');
 var login_form_1 = require('client/dev/login/components/login-form');
+var auth_service_1 = require('../../auth/services/auth-service');
 var ApplicationCmp = (function () {
     function ApplicationCmp() {
     }
@@ -20,6 +21,7 @@ var ApplicationCmp = (function () {
         core_1.Component({
             selector: 'application-cmp',
             directives: [header_cmp_1.HeaderCmp, router_1.ROUTER_DIRECTIVES],
+            providers: [auth_service_1.AuthService],
             templateUrl: 'client/dev/application/templates/application-cmp.html',
         }),
         router_1.RouteConfig([

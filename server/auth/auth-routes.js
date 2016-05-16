@@ -9,6 +9,12 @@ var AuthRoutes = (function () {
             .post(passport.authenticate('local'), function (req, res) {
             res.json(req.user, 200);
         });
+        router
+            .route('/auth/logout')
+            .get(function (req, res) {
+            req.logout();
+            res.json({}, 200);
+        });
     };
     return AuthRoutes;
 }());

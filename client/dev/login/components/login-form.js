@@ -13,9 +13,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('angular2/core');
 var common_1 = require('angular2/common');
+var router_1 = require('angular2/router');
 var auth_service_1 = require('../../auth/services/auth-service');
 var LoginForm = (function () {
-    function LoginForm(fb, _authService) {
+    function LoginForm(fb, _router, _authService) {
+        this._router = _router;
         this._authService = _authService;
         this.loginForm = fb.group({
             "email": ["", common_1.Validators.required],
@@ -23,21 +25,22 @@ var LoginForm = (function () {
         });
     }
     LoginForm.prototype.login = function (email, password) {
+        var _this = this;
         this._authService
             .login(this.loginForm.value.email, this.loginForm.value.password)
             .subscribe(function (user) {
-            console.log(user);
+            _this._router.navigate(['Home']);
         });
     };
     LoginForm = __decorate([
         core_1.Component({
             selector: 'login-form',
-            templateUrl: 'client/dev/login/templates/login-form.html',
-            providers: [auth_service_1.AuthService]
+            templateUrl: 'client/dev/login/templates/login-form.html'
         }),
         __param(0, core_1.Inject(common_1.FormBuilder)),
-        __param(1, core_1.Inject(auth_service_1.AuthService)), 
-        __metadata('design:paramtypes', [common_1.FormBuilder, auth_service_1.AuthService])
+        __param(1, core_1.Inject(router_1.Router)),
+        __param(2, core_1.Inject(auth_service_1.AuthService)), 
+        __metadata('design:paramtypes', [common_1.FormBuilder, router_1.Router, auth_service_1.AuthService])
     ], LoginForm);
     return LoginForm;
 }());

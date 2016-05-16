@@ -20,17 +20,18 @@ var HeaderCmp = (function () {
     }
     HeaderCmp.prototype.ngOnInit = function () {
         var _this = this;
+        this._authService.currentUser
+            .subscribe(function (u) { return _this.user = u; });
+    };
+    HeaderCmp.prototype.logout = function () {
         this._authService
-            .getCurrentUser()
-            .subscribe(function (user) {
-            _this.user = user;
-        });
+            .logout()
+            .subscribe();
     };
     HeaderCmp = __decorate([
         core_1.Component({
             selector: 'header-cmp',
             directives: [router_1.RouterLink],
-            providers: [auth_service_1.AuthService],
             templateUrl: 'client/dev/header/templates/header-cmp.html'
         }),
         __param(0, core_1.Inject(auth_service_1.AuthService)), 

@@ -10,18 +10,24 @@ import {
   Control
 } from 'angular2/common';
 
+import {
+  Router
+} from 'angular2/router';
+
 import {AuthService} from '../../auth/services/auth-service';
 
 @Component({
   selector: 'login-form',
-  templateUrl: 'client/dev/login/templates/login-form.html',
-  providers: [AuthService]
+  templateUrl: 'client/dev/login/templates/login-form.html'
 })
 export class LoginForm {
   
   loginForm: ControlGroup;
   
-  constructor(@Inject(FormBuilder) fb:FormBuilder, @Inject(AuthService) private _authService: AuthService) {
+  constructor(@Inject(FormBuilder) fb:FormBuilder, 
+    @Inject(Router) private _router: Router, 
+    @Inject(AuthService) private _authService: AuthService
+  ) {
     
     this.loginForm = fb.group({
       "email": ["", Validators.required],
@@ -30,11 +36,12 @@ export class LoginForm {
   }
   
   public login(email: string, password: string) {
-    
+        
     this._authService
         .login(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe((user) => {
-          console.log(user);
+          
+          this._router.navigate(['Home']);
         });
   }
 }
