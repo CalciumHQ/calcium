@@ -10,7 +10,7 @@ var LocalStrategy = (function () {
             usernameField: 'email',
             passwordField: 'password'
         }, function (email, password, done) {
-            user_dao_1.default['findOne']({ email: email })
+            user_dao_1["default"]['findOne']({ email: email })
                 .then(function (user) {
                 done(null, user);
             })

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var _ = require('lodash');
 var todo_model_1 = require('../model/todo-model');
-todo_model_1.default.static('getAll', function () {
+todo_model_1["default"].static('getAll', function () {
     return new Promise(function (resolve, reject) {
         var _query = {};
         Todo
@@ -14,7 +14,7 @@ todo_model_1.default.static('getAll', function () {
         });
     });
 });
-todo_model_1.default.static('createTodo', function (todo) {
+todo_model_1["default"].static('createTodo', function (todo) {
     return new Promise(function (resolve, reject) {
         if (!_.isObject(todo)) {
             return reject(new TypeError('Todo is not a valid object.'));
@@ -26,7 +26,7 @@ todo_model_1.default.static('createTodo', function (todo) {
         });
     });
 });
-todo_model_1.default.static('deleteTodo', function (id) {
+todo_model_1["default"].static('deleteTodo', function (id) {
     return new Promise(function (resolve, reject) {
         if (!_.isString(id)) {
             return reject(new TypeError('Id is not a valid string.'));
@@ -39,6 +39,6 @@ todo_model_1.default.static('deleteTodo', function (id) {
         });
     });
 });
-var Todo = mongoose.model('Todo', todo_model_1.default);
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = Todo;
+var Todo = mongoose.model('Todo', todo_model_1["default"]);
+exports.__esModule = true;
+exports["default"] = Todo;
