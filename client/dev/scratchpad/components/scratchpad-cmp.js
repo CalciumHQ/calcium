@@ -10,28 +10,36 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('angular2/core');
 var common_1 = require('angular2/common');
+var round_1 = require("../pipes/round");
 var calculation_service_1 = require("../../calculation/services/calculation-service");
 var ScratchpadCmp = (function () {
     function ScratchpadCmp(fb, _calculateService) {
         this._calculateService = _calculateService;
         this.output = {
             status: 'default',
-            message: ''
+            message: '',
+            values: {
+                Nt: 0,
+                phi_Nt: 0
+            }
         };
         this.scratchpadForm = fb.group({
-            "expression": ["", common_1.Validators.required],
-            "x": ["", common_1.Validators.required],
-            "y": ["", common_1.Validators.required]
+            "d": ["", common_1.Validators.required],
+            "fy": ["500", common_1.Validators.required]
         });
     }
-    ScratchpadCmp.prototype.calculate = function (expression, x) {
+    ScratchpadCmp.prototype.calculate = function () {
         var _this = this;
+        if (!this.scratchpadForm.valid) {
+            return;
+        }
         this._calculateService
             .calculate({
-            x: this.scratchpadForm.value.x,
-            y: this.scratchpadForm.value.y
+            d: parseInt(this.scratchpadForm.value.d),
+            fy: parseInt(this.scratchpadForm.value.fy)
         }, this.scratchpadForm.value.expression)
             .subscribe(function (result) {
+            _this.output.values = result.values;
             _this.output.status = result.status;
             _this.output.message = JSON.stringify(result.values);
         });
@@ -41,7 +49,8 @@ var ScratchpadCmp = (function () {
             selector: 'scratchpad-cmp',
             templateUrl: 'client/dev/scratchpad/templates/scratchpad.html',
             styleUrls: ['client/dev/scratchpad/styles/scratchpad.css'],
-            providers: [calculation_service_1.CalculationService]
+            providers: [calculation_service_1.CalculationService],
+            pipes: [round_1["default"]]
         }),
         __param(0, core_1.Inject(common_1.FormBuilder)),
         __param(1, core_1.Inject(calculation_service_1.CalculationService))

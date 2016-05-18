@@ -10,13 +10,15 @@ import {
   Control
 } from 'angular2/common';
 
+import Round from "../pipes/round";
 import {CalculationService} from "../../calculation/services/calculation-service";
 
 @Component({
   selector: 'scratchpad-cmp',
   templateUrl: 'client/dev/scratchpad/templates/scratchpad.html',
   styleUrls: ['client/dev/scratchpad/styles/scratchpad.css'],
-  providers: [CalculationService]
+  providers: [CalculationService],
+  pipes: [Round]
 })
 export class ScratchpadCmp {
   
@@ -24,26 +26,35 @@ export class ScratchpadCmp {
   
   public output = {
     status: 'default',
-    message: ''
+    message: '',
+    values: {
+      Nt: 0,
+      phi_Nt: 0
+    }
   };
   
   constructor(@Inject(FormBuilder) fb:FormBuilder, @Inject(CalculationService) private _calculateService: CalculationService) {
     
     this.scratchpadForm = fb.group({
-      "expression": ["", Validators.required],
-      "x": ["", Validators.required],
-      "y": ["", Validators.required]
+      "d": ["", Validators.required],
+      "fy": ["500", Validators.required]
     });
   }
   
-  public calculate(expression: string, x: string) {
+  public calculate() {
+    
+    if (!this.scratchpadForm.valid) {
+     
+      return; 
+    }
     
     this._calculateService
         .calculate({
-          x: this.scratchpadForm.value.x,
-          y: this.scratchpadForm.value.y
+          d: parseInt(this.scratchpadForm.value.d),
+          fy: parseInt(this.scratchpadForm.value.fy)
         }, this.scratchpadForm.value.expression)
         .subscribe((result) => {
+          this.output.values = result.values;
           this.output.status = result.status;
           this.output.message = JSON.stringify(result.values);
         });

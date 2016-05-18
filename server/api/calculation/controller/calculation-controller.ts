@@ -5,7 +5,6 @@ export class CalculationController {
   
   static createCalculation(req: express.Request, res: express.Response):void {
     
-      let _expression = req.body.expression;
       let _values = req.body.values;
       var output = {};
       
@@ -16,17 +15,28 @@ export class CalculationController {
       
       py.on('message', (m) => {
         
-        for (var attrname in m) { output[attrname] = m[attrname]; }
-      });
-      
-      py.on('close', () => {
-        
-        let _data = {
-          status: 'success', 
-          values: output
-        };
-        
-        res.json(_data);
+        switch (m.status) {
+          
+          case 'success':
+            for (var attrname in m.values) { output[attrname] = m.values[attrname]; }
+            
+            let _data = { 
+              status: 'success',
+              values: output 
+            };
+            
+            res.json(_data);
+            break;
+            
+          case 'error':
+            console.error(`ERROR: ${m.message}`);
+            res.json({ message: m.message }, 500);
+            break;
+            
+          case 'log':
+            console.log(`LOG: ${JSON.stringify(m.data)}`);
+            break;
+        } 
       });
       
       for (var name in _values) {
@@ -39,9 +49,9 @@ export class CalculationController {
           }
         });
       }
-      console.log(_expression);
+      
       py
-        .send({ command: 'set_expression', args: { value: _expression } })
+        .send({ command: 'set_calculation', args: { value: 'TestCalculation' } })
         .send({ command: 'execute' })
         .end();
   }
