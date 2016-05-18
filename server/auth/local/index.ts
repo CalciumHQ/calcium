@@ -21,6 +21,6 @@ export class LocalStrategy {
           })
           .catch(error => done(error)); 
       }
-    ));
+    )); 
   }
 }

@@ -39,6 +39,12 @@ export class ScratchpadCmp {
       "d": ["", Validators.required],
       "fy": ["500", Validators.required]
     });
+    
+    this.scratchpadForm
+        .valueChanges
+        .debounceTime(400)
+        .distinctUntilChanged()
+        .subscribe(() => this.calculate());
   }
   
   public calculate() {

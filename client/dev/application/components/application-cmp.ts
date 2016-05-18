@@ -2,10 +2,12 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 
-import {HeaderCmp} from 'client/dev/header/components/header-cmp';
-import {ScratchpadCmp} from 'client/dev/scratchpad/components/scratchpad-cmp';
-import {LoginForm} from 'client/dev/login/components/login-form';
+import {HeaderCmp} from '../../header/components/header-cmp';
+import {ScratchpadCmp} from '../../scratchpad/components/scratchpad-cmp';
+import {LoginForm} from '../../login/components/login-form';
 import {AuthService} from '../../auth/services/auth-service';
+
+import 'rxjs/Rx'
 
 @Component({
   selector: 'application-cmp',
@@ -18,5 +20,5 @@ import {AuthService} from '../../auth/services/auth-service';
   { name: 'Login', path: '/login', component: LoginForm }
 ])
 export class ApplicationCmp {
-   
+  
 }

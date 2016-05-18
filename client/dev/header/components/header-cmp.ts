@@ -6,7 +6,7 @@ import {
 } from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
-import {AuthService} from 'client/dev/auth/services/auth-service';
+import {AuthService} from '../../auth/services/auth-service';
 
 @Component({
   selector: 'header-cmp',

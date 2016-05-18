@@ -1,7 +1,7 @@
 import gulp from 'gulp';
 
-const ES6 = '**/*.es6';
-const TS = '**/*.ts';
+const ES6 = 'server/**/*.es6';
+const TS = 'server/**/*.ts';
 
 gulp.task('server.watch', () => {
   

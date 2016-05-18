@@ -16,5 +16,5 @@ var schema = new mongoose.Schema({
         default: Date.now
     }
 });
-exports.__esModule = true;
-exports["default"] = schema;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = schema;

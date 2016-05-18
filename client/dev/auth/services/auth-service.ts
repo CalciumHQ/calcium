@@ -54,18 +54,18 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
     
     return this._http
-               .get(AuthService.LOGOUT_ENDPOINT, null, {headers})
+               .get(AuthService.LOGOUT_ENDPOINT, {headers})
                .map((r) => r.json())
                .do((r) => this.currentUserSource.next(null));
   }
   
-  public checkCurrentUser():Observable<any> {
+  public checkCurrentUser() {
     let headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
 
     this._http
-        .get(AuthService.USER_ENDPOINT, null, {headers})
+        .get(AuthService.USER_ENDPOINT, {headers})
         .map((r) => r.json())
         .subscribe((r) => this.currentUserSource.next(r));
   }

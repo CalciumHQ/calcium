@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
@@ -14,6 +17,7 @@ var round_1 = require("../pipes/round");
 var calculation_service_1 = require("../../calculation/services/calculation-service");
 var ScratchpadCmp = (function () {
     function ScratchpadCmp(fb, _calculateService) {
+        var _this = this;
         this._calculateService = _calculateService;
         this.output = {
             status: 'default',
@@ -27,6 +31,11 @@ var ScratchpadCmp = (function () {
             "d": ["", common_1.Validators.required],
             "fy": ["500", common_1.Validators.required]
         });
+        this.scratchpadForm
+            .valueChanges
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .subscribe(function () { return _this.calculate(); });
     }
     ScratchpadCmp.prototype.calculate = function () {
         var _this = this;
@@ -50,10 +59,11 @@ var ScratchpadCmp = (function () {
             templateUrl: 'client/dev/scratchpad/templates/scratchpad.html',
             styleUrls: ['client/dev/scratchpad/styles/scratchpad.css'],
             providers: [calculation_service_1.CalculationService],
-            pipes: [round_1["default"]]
+            pipes: [round_1.default]
         }),
         __param(0, core_1.Inject(common_1.FormBuilder)),
-        __param(1, core_1.Inject(calculation_service_1.CalculationService))
+        __param(1, core_1.Inject(calculation_service_1.CalculationService)), 
+        __metadata('design:paramtypes', [common_1.FormBuilder, calculation_service_1.CalculationService])
     ], ScratchpadCmp);
     return ScratchpadCmp;
 }());
