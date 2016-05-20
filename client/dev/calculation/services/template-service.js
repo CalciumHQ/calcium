@@ -6,16 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('angular2/core');
-var Round = (function () {
-    function Round() {
+require('rxjs/add/operator/map');
+var TemplateService = (function () {
+    function TemplateService() {
     }
-    Round.prototype.transform = function (value, accuracy) {
-        return value.toFixed(accuracy);
-    };
-    Round = __decorate([
-        core_1.Pipe({ name: 'round' })
-    ], Round);
-    return Round;
+    TemplateService = __decorate([
+        core_1.Injectable()
+    ], TemplateService);
+    return TemplateService;
 }());
-exports.__esModule = true;
-exports["default"] = Round;
+exports.TemplateService = TemplateService;

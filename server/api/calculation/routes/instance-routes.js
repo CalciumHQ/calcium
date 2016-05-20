@@ -12,6 +12,9 @@ var InstanceRoutes = (function () {
             .route('/api/instances/:id')
             .get(instance_controller_1.InstanceController.getOne)
             .delete(instance_controller_1.InstanceController.deleteInstance);
+        router
+            .route('/api/instances/:id/template')
+            .get(instance_controller_1.InstanceController.getTemplate);
     };
     return InstanceRoutes;
 }());

@@ -14,5 +14,9 @@ export class InstanceRoutes {
         .route('/api/instances/:id')
         .get(InstanceController.getOne)
         .delete(InstanceController.deleteInstance);
+        
+      router
+        .route('/api/instances/:id/template')
+        .get(InstanceController.getTemplate); 
     }
 }

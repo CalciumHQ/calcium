@@ -1,3 +1,4 @@
+import * as path from 'path';
 import * as express from 'express';
 import InstanceDAO from '../dao/instance-dao';
 
@@ -34,5 +35,10 @@ export class InstanceController {
       ['deleteInstance'](_id)
       .then(() => res.status(200).end())
       .catch(error => res.status(400).json(error));
+  }
+  
+  static getTemplate(req: express.Request, res: express.Response):void {
+    let templatePath = path.resolve(__dirname + '/../templates/test/TestCalculation.html'); 
+    res.status(200).sendFile(templatePath);   
   }
 }

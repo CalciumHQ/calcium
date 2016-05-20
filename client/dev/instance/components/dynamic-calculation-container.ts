@@ -11,7 +11,12 @@ import {
   FORM_PROVIDERS
 } from 'angular2/common';
 
+import {
+  RouteParams
+} from 'angular2/router';
+
 import {CalculationService} from "../../calculation/services/calculation-service";
+import {InstanceService} from "../../calculation/services/instance-service";
 import createDynamicCalculation from './dynamic-calculation-cmp';
 
 @Component({
@@ -20,45 +25,31 @@ import createDynamicCalculation from './dynamic-calculation-cmp';
 })
 export class DynamicCalculationContainer implements OnInit {
   
+  public templateHtml;
+  
   constructor(
     private loader: DynamicComponentLoader,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    private _params: RouteParams,
+    private _instanceService: InstanceService
   ) { }
   
   ngOnInit() {
-    
-    const templateHtml = `
-<form class="scratchpad-form" [ngFormModel]="scratchpadForm">
-  <div class="form-group">
-    <label for="">Enter a bar diameter</label>
-    <div class="input-group">
-      <input ngControl="d" type="number" placeholder="12" class="form-control">
-      <span class="input-group-addon">mm</span>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="">Enter yield strength of steel</label>
-    <div class="input-group">
-      <input ngControl="fy" type="number" placeholder="500" class="form-control">
-      <span class="input-group-addon">MPa</span>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label>Tensile Strength</label>
-    <p>Nt = {{ output.values.Nt / 1000 | round:2 }}kN</p>
-    <p>&phi;Nt = {{ output.values.phi_Nt / 1000 | round:2 }}kN</p>
-  </div>
-</form>
-    `;
+    this._loadTemplate();
+  }
   
-    let resolvedProviders = ReflectiveInjector.resolve([FORM_PROVIDERS, CalculationService]);
-    
-    this.loader.loadNextToLocation(
-      createDynamicCalculation(templateHtml, [FORM_DIRECTIVES]),
-      this.viewContainerRef,
-      resolvedProviders
-    )
+  private _loadTemplate() {
+    this._instanceService
+        .getTemplate(this._params.get('id'))
+        .subscribe((template) => {
+          this.templateHtml = template; 
+          
+          let resolvedProviders = ReflectiveInjector.resolve([FORM_PROVIDERS, CalculationService]);
+          this.loader.loadNextToLocation(
+            createDynamicCalculation(this.templateHtml, [FORM_DIRECTIVES]),
+            this.viewContainerRef,
+            resolvedProviders
+          )
+        });
   }
 }
