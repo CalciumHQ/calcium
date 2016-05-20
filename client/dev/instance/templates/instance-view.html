@@ -7,29 +7,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <form class="scratchpad-form" [ngFormModel]="scratchpadForm">
-        <div class="form-group">
-          <label for="">Enter a bar diameter</label>
-          <div class="input-group">
-            <input ngControl="d" type="number" placeholder="12" class="form-control">
-            <span class="input-group-addon">mm</span>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="">Enter yield strength of steel</label>
-          <div class="input-group">
-            <input ngControl="fy" type="number" placeholder="500" class="form-control">
-            <span class="input-group-addon">MPa</span>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label>Tensile Strength</label>
-          <p>Nt = {{ output.values.Nt / 1000 | round:2 }}kN</p>
-          <p>&phi;Nt = {{ output.values.phi_Nt / 1000 | round:2 }}kN</p>
-        </div>
-      </form>
+      <dynamic-calculation-container></dynamic-calculation-container>
 
       <div class="instance-output panel" 
           [ngClass]="{ 'panel-success': output.status == 'success', 'panel-danger': output.status == 'error' }" 
