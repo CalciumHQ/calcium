@@ -1,0 +1,37 @@
+<div class="page-header">
+  <div class="container">
+    <h2>Dashboard <small>Your saved calculations</small></h2>
+  </div>
+</div>
+
+<div class="container">
+  <button class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add new</button>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <td><strong>Name</strong></td>
+            <td><strong>Type</strong></td>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr *ngFor="let instance of instances">
+            <td><a [routerLink]="['Instance', { id: instance._id }]">{{ instance.name }}</a></td>
+            <td>{{ instance.template.name }}</td>
+            <td>
+              <button class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">Action <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="">Delete</a></li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

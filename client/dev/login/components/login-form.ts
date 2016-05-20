@@ -41,7 +41,7 @@ export class LoginForm {
         .login(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe((user) => {
           
-          this._router.navigate(['Home']);
+          this._router.navigate(['Dashboard']);
         });
   }
 }

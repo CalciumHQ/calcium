@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="container">
-    <h2>Scratchpad <small>Ultimate tensile strength of a steel bar</small></h2>
+    <h2 *ngIf="instance">{{ instance.name }} <small>{{ instance.template.name }}</small></h2>
   </div>
 </div>
 
@@ -31,7 +31,7 @@
         </div>
       </form>
 
-      <div class="scratchpad-output panel" 
+      <div class="instance-output panel" 
           [ngClass]="{ 'panel-success': output.status == 'success', 'panel-danger': output.status == 'error' }" 
           *ngIf="output.message" >
           

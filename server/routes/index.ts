@@ -2,6 +2,7 @@ import * as express from 'express';
 import {AuthRoutes} from '../auth/auth-routes';
 import {UserRoutes} from '../api/user/routes/user-routes';
 import {CalculationRoutes} from '../api/calculation/routes/calculation-routes';
+import {InstanceRoutes} from '../api/calculation/routes/instance-routes';
 import {StaticDispatcher} from '../commons/static/index';
 
 export class Routes {
@@ -11,6 +12,7 @@ export class Routes {
      AuthRoutes.init(router);
      UserRoutes.init(router);
      CalculationRoutes.init(router);
+     InstanceRoutes.init(router);
 
      router
        .route('*')

@@ -29,7 +29,7 @@ var LoginForm = (function () {
         this._authService
             .login(this.loginForm.value.email, this.loginForm.value.password)
             .subscribe(function (user) {
-            _this._router.navigate(['Home']);
+            _this._router.navigate(['Dashboard']);
         });
     };
     LoginForm = __decorate([

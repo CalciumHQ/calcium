@@ -1,6 +1,7 @@
 import {
   Component,
-  Inject
+  Inject,
+  OnInit
 } from 'angular2/core';
 
 import {
@@ -10,17 +11,24 @@ import {
   Control
 } from 'angular2/common';
 
+import {
+  RouteParams
+} from 'angular2/router';
+
 import Round from "../pipes/round";
 import {CalculationService} from "../../calculation/services/calculation-service";
+import {InstanceService} from '../../calculation/services/instance-service';
 
 @Component({
-  selector: 'scratchpad-cmp',
-  templateUrl: 'client/dev/scratchpad/templates/scratchpad.html',
-  styleUrls: ['client/dev/scratchpad/styles/scratchpad.css'],
-  providers: [CalculationService],
+  selector: 'instance-view',
+  templateUrl: 'client/dev/instance/templates/instance-view.html',
+  styleUrls: ['client/dev/instance/styles/instance-view.css'],
+  providers: [CalculationService, InstanceService],
   pipes: [Round]
 })
-export class ScratchpadCmp {
+export class InstanceView implements OnInit {
+  
+  public instance;
   
   scratchpadForm: ControlGroup;
   
@@ -33,7 +41,10 @@ export class ScratchpadCmp {
     }
   };
   
-  constructor(@Inject(FormBuilder) fb:FormBuilder, @Inject(CalculationService) private _calculateService: CalculationService) {
+  constructor(@Inject(FormBuilder) fb:FormBuilder,
+              @Inject(RouteParams) private _params:RouteParams,
+              @Inject(CalculationService) private _calculateService: CalculationService,
+              @Inject(InstanceService) private _instanceService: InstanceService) {
     
     this.scratchpadForm = fb.group({
       "d": ["", Validators.required],
@@ -46,6 +57,19 @@ export class ScratchpadCmp {
         .distinctUntilChanged()
         .subscribe(() => this.calculate());
   }
+  
+  ngOnInit() {
+    
+    this._getInstance();
+  }
+  
+  private _getInstance() {
+    this._instanceService
+        .getOne(this._params.get('id'))
+        .subscribe((instance) => {
+          this.instance = instance; 
+        });
+  } 
   
   public calculate() {
     

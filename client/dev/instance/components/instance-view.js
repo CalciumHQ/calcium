@@ -13,12 +13,16 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('angular2/core');
 var common_1 = require('angular2/common');
+var router_1 = require('angular2/router');
 var round_1 = require("../pipes/round");
 var calculation_service_1 = require("../../calculation/services/calculation-service");
-var ScratchpadCmp = (function () {
-    function ScratchpadCmp(fb, _calculateService) {
+var instance_service_1 = require('../../calculation/services/instance-service');
+var InstanceView = (function () {
+    function InstanceView(fb, _params, _calculateService, _instanceService) {
         var _this = this;
+        this._params = _params;
         this._calculateService = _calculateService;
+        this._instanceService = _instanceService;
         this.output = {
             status: 'default',
             message: '',
@@ -37,7 +41,18 @@ var ScratchpadCmp = (function () {
             .distinctUntilChanged()
             .subscribe(function () { return _this.calculate(); });
     }
-    ScratchpadCmp.prototype.calculate = function () {
+    InstanceView.prototype.ngOnInit = function () {
+        this._getInstance();
+    };
+    InstanceView.prototype._getInstance = function () {
+        var _this = this;
+        this._instanceService
+            .getOne(this._params.get('id'))
+            .subscribe(function (instance) {
+            _this.instance = instance;
+        });
+    };
+    InstanceView.prototype.calculate = function () {
         var _this = this;
         if (!this.scratchpadForm.valid) {
             return;
@@ -53,18 +68,20 @@ var ScratchpadCmp = (function () {
             _this.output.message = JSON.stringify(result.values);
         });
     };
-    ScratchpadCmp = __decorate([
+    InstanceView = __decorate([
         core_1.Component({
-            selector: 'scratchpad-cmp',
-            templateUrl: 'client/dev/scratchpad/templates/scratchpad.html',
-            styleUrls: ['client/dev/scratchpad/styles/scratchpad.css'],
-            providers: [calculation_service_1.CalculationService],
+            selector: 'instance-view',
+            templateUrl: 'client/dev/instance/templates/instance-view.html',
+            styleUrls: ['client/dev/instance/styles/instance-view.css'],
+            providers: [calculation_service_1.CalculationService, instance_service_1.InstanceService],
             pipes: [round_1.default]
         }),
         __param(0, core_1.Inject(common_1.FormBuilder)),
-        __param(1, core_1.Inject(calculation_service_1.CalculationService)), 
-        __metadata('design:paramtypes', [common_1.FormBuilder, calculation_service_1.CalculationService])
-    ], ScratchpadCmp);
-    return ScratchpadCmp;
+        __param(1, core_1.Inject(router_1.RouteParams)),
+        __param(2, core_1.Inject(calculation_service_1.CalculationService)),
+        __param(3, core_1.Inject(instance_service_1.InstanceService)), 
+        __metadata('design:paramtypes', [common_1.FormBuilder, router_1.RouteParams, calculation_service_1.CalculationService, instance_service_1.InstanceService])
+    ], InstanceView);
+    return InstanceView;
 }());
-exports.ScratchpadCmp = ScratchpadCmp;
+exports.InstanceView = InstanceView;
