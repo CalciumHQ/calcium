@@ -9,6 +9,7 @@ instanceSchema.static('getAll', (params:Object):Promise<any> => {
 
         Instance
           .find()
+          .populate('template')
           .exec((err, instance) => {
               err ? reject(err)
                   : resolve(instance);
@@ -22,6 +23,7 @@ instanceSchema.static('getOne', (params:Object):Promise<any> => {
 
         Instance
           .findOne(_query)
+          .populate('template')
           .exec((err, instance) => {
               err ? reject(err)
                   : resolve(instance);

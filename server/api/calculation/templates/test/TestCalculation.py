@@ -11,6 +11,7 @@ def Calculate(inputs):
   phi_Nt = phi * Nt
   
   return ({
+    'Ag': N(Ag),
     'Nt': N(Nt), 
     'phi_Nt': N(phi_Nt) 
   })

@@ -1,15 +1,13 @@
 "use strict";
 var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
-    email: {
+    name: {
         type: String,
         required: true
     },
-    firstName: {
-        type: String
-    },
-    lastName: {
-        type: String
+    templateUrl: {
+        type: String,
+        required: true
     },
     createdAt: {
         type: Date,

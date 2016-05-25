@@ -7,7 +7,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <dynamic-calculation-container></dynamic-calculation-container>
+      <dynamic-calculation-container
+          [instance]="instance" 
+          *ngIf="instance" ></dynamic-calculation-container>
 
       <div class="instance-output panel" 
           [ngClass]="{ 'panel-success': output.status == 'success', 'panel-danger': output.status == 'error' }" 

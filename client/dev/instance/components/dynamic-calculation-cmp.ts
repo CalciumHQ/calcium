@@ -34,6 +34,7 @@ export default function CreateDynamicCalculation(template:string, directives:Arr
       status: 'default',
       message: '',
       values: {
+        Ag: 0,
         Nt: 0,
         phi_Nt: 0
       }

@@ -1,5 +1,6 @@
 import {
   Component,
+  Input
   DynamicComponentLoader,
   ViewContainerRef,
   ReflectiveInjector,
@@ -25,7 +26,8 @@ import createDynamicCalculation from './dynamic-calculation-cmp';
 })
 export class DynamicCalculationContainer implements OnInit {
   
-  public templateHtml;
+  @Input() instance:any;
+  private templateHtml;
   
   constructor(
     private loader: DynamicComponentLoader,
@@ -40,8 +42,8 @@ export class DynamicCalculationContainer implements OnInit {
   
   private _loadTemplate() {
     this._instanceService
-        .getTemplate(this._params.get('id'))
-        .subscribe((template) => {
+        .getTemplate(this.instance.template.templateUrl)
+        .subscribe((template) => { 
           this.templateHtml = template; 
           
           let resolvedProviders = ReflectiveInjector.resolve([FORM_PROVIDERS, CalculationService]);

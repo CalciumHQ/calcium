@@ -5,9 +5,8 @@ var schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  template: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Template',
+  templateUrl: {
+    type: String,
     required: true
   },
   createdAt: {

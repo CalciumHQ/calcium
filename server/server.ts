@@ -8,12 +8,15 @@ var PORT = process.env.PORT || 3333;
 import * as express from 'express';
 import * as os from 'os';
 import * as http from 'http';
+import * as path from 'path';
 import {RoutesConfig} from './config/routes.conf';
 import {AuthConfig} from './config/auth.conf';
 import {DBConfig} from './config/db.conf';
 import {Routes} from './routes/index';
 
 const app = express();
+
+app.use('/tpl', express.static(path.resolve(__dirname + '/commons/static/templates')));
 
 RoutesConfig.init(app);
 DBConfig.init();

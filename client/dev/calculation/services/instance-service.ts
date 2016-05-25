@@ -18,7 +18,6 @@ import 'rxjs/add/operator/map';
 export class InstanceService {
   
   static ENDPOINT: string = '/api/instances/:id';
-  static TEMPLATE_ENDPOINT: string = '/api/instances/:id/template'
 
   constructor(@Inject(Http) private _http: Http) {
 
@@ -44,13 +43,13 @@ export class InstanceService {
                .map((r) => r.json());
   }
   
-  getTemplate(id:string):Observable<any> {
+  getTemplate(url:string):Observable<any> {
      let headers = new Headers();
      
      headers.append('Content-Type', 'application/json');
      
      return this._http
-                .get(InstanceService.TEMPLATE_ENDPOINT.replace(':id', id), {headers})
+                .get(url, {headers})
                 .map((r) => r.text());
   }
 }
