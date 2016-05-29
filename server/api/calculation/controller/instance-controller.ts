@@ -37,6 +37,17 @@ export class InstanceController {
       .catch(error => res.status(400).json(error));
   }
   
+  static saveInstance(req: express.Request, res: express.Response):void {
+    let _id = req.params.id;
+    let _instance = req.body;
+    
+
+    InstanceDAO
+      ['saveInstance'](_id, _instance)
+      .then((instance) => res.status(200).json(instance))
+      .catch(error => res.status(400).json(error));
+  }
+  
   static getTemplate(req: express.Request, res: express.Response):void {
     let templatePath = path.resolve(__dirname + '/../templates/test/TestCalculation.html'); 
     res.status(200).sendFile(templatePath);   

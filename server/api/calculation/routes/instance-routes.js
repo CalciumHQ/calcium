@@ -11,6 +11,7 @@ var InstanceRoutes = (function () {
         router
             .route('/api/instances/:id')
             .get(instance_controller_1.InstanceController.getOne)
+            .patch(instance_controller_1.InstanceController.saveInstance)
             .delete(instance_controller_1.InstanceController.deleteInstance);
         router
             .route('/api/instances/:id/template')

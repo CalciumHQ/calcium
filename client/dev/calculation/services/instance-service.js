@@ -32,6 +32,14 @@ var InstanceService = (function () {
             .get(InstanceService.ENDPOINT.replace(':id', id), { headers: headers })
             .map(function (r) { return r.json(); });
     };
+    InstanceService.prototype.saveInstance = function (id, instance) {
+        var headers = new http_1.Headers();
+        var stringified = JSON.stringify(instance);
+        headers.append('Content-Type', 'application/json');
+        return this._http
+            .patch(InstanceService.ENDPOINT.replace(':id', id), stringified, { headers: headers })
+            .map(function (r) { return r.json(); });
+    };
     InstanceService.prototype.getTemplate = function (url) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');

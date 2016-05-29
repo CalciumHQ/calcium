@@ -48,7 +48,7 @@ export class DynamicCalculationContainer implements OnInit {
           
           let resolvedProviders = ReflectiveInjector.resolve([FORM_PROVIDERS, CalculationService]);
           this.loader.loadNextToLocation(
-            createDynamicCalculation(this.templateHtml, [FORM_DIRECTIVES]),
+            createDynamicCalculation(this.templateHtml, this.instance, [FORM_DIRECTIVES]),
             this.viewContainerRef,
             resolvedProviders
           )

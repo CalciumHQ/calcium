@@ -15,11 +15,13 @@ var core_1 = require('angular2/core');
 var common_1 = require('angular2/common');
 var round_1 = require("../pipes/round");
 var calculation_service_1 = require("../../calculation/services/calculation-service");
-function CreateDynamicCalculation(template, directives) {
+var instance_service_1 = require("../../calculation/services/instance-service");
+function CreateDynamicCalculation(template, instance, directives) {
     var DynamicCalculationComponent = (function () {
-        function DynamicCalculationComponent(fb, _calculateService) {
+        function DynamicCalculationComponent(fb, _calculateService, _instanceService) {
             var _this = this;
             this._calculateService = _calculateService;
+            this._instanceService = _instanceService;
             this.output = {
                 status: 'default',
                 message: '',
@@ -30,8 +32,8 @@ function CreateDynamicCalculation(template, directives) {
                 }
             };
             this.scratchpadForm = fb.group({
-                "d": ["", common_1.Validators.required],
-                "fy": ["500", common_1.Validators.required]
+                "d": [instance.values.d || "12", common_1.Validators.required],
+                "fy": [instance.values.fy || "500", common_1.Validators.required]
             });
             this.scratchpadForm
                 .valueChanges
@@ -54,6 +56,9 @@ function CreateDynamicCalculation(template, directives) {
                 _this.output.status = result.status;
                 _this.output.message = JSON.stringify(result.values);
             });
+            this._instanceService
+                .saveInstance(instance._id, { values: this.scratchpadForm.value })
+                .subscribe();
         };
         DynamicCalculationComponent = __decorate([
             core_1.Component({
@@ -64,8 +69,9 @@ function CreateDynamicCalculation(template, directives) {
                 template: template,
             }),
             __param(0, core_1.Inject(common_1.FormBuilder)),
-            __param(1, core_1.Inject(calculation_service_1.CalculationService)), 
-            __metadata('design:paramtypes', [common_1.FormBuilder, calculation_service_1.CalculationService])
+            __param(1, core_1.Inject(calculation_service_1.CalculationService)),
+            __param(2, core_1.Inject(instance_service_1.InstanceService)), 
+            __metadata('design:paramtypes', [common_1.FormBuilder, calculation_service_1.CalculationService, instance_service_1.InstanceService])
         ], DynamicCalculationComponent);
         return DynamicCalculationComponent;
     }());

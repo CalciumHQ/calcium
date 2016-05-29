@@ -13,6 +13,7 @@ export class InstanceRoutes {
       router
         .route('/api/instances/:id')
         .get(InstanceController.getOne)
+        .patch(InstanceController.saveInstance)
         .delete(InstanceController.deleteInstance);
         
       router

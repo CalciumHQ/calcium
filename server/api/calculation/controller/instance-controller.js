@@ -27,6 +27,13 @@ var InstanceController = (function () {
             .then(function () { return res.status(200).end(); })
             .catch(function (error) { return res.status(400).json(error); });
     };
+    InstanceController.saveInstance = function (req, res) {
+        var _id = req.params.id;
+        var _instance = req.body;
+        instance_dao_1.default['saveInstance'](_id, _instance)
+            .then(function (instance) { return res.status(200).json(instance); })
+            .catch(function (error) { return res.status(400).json(error); });
+    };
     InstanceController.getTemplate = function (req, res) {
         var templatePath = path.resolve(__dirname + '/../templates/test/TestCalculation.html');
         res.status(200).sendFile(templatePath);

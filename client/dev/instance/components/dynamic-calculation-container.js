@@ -31,7 +31,7 @@ var DynamicCalculationContainer = (function () {
             .subscribe(function (template) {
             _this.templateHtml = template;
             var resolvedProviders = core_1.ReflectiveInjector.resolve([common_1.FORM_PROVIDERS, calculation_service_1.CalculationService]);
-            _this.loader.loadNextToLocation(dynamic_calculation_cmp_1.default(_this.templateHtml, [common_1.FORM_DIRECTIVES]), _this.viewContainerRef, resolvedProviders);
+            _this.loader.loadNextToLocation(dynamic_calculation_cmp_1.default(_this.templateHtml, _this.instance, [common_1.FORM_DIRECTIVES]), _this.viewContainerRef, resolvedProviders);
         });
     };
     __decorate([

@@ -16,8 +16,9 @@ import {
 import Round from "../pipes/round";
 
 import {CalculationService} from "../../calculation/services/calculation-service";
+import {InstanceService} from "../../calculation/services/instance-service";
 
-export default function CreateDynamicCalculation(template:string, directives:Array<any>) {
+export default function CreateDynamicCalculation(template:string, instance: any, directives:Array<any>) {
   
   @Component({
     selector: 'dynamic-calculation',
@@ -41,11 +42,12 @@ export default function CreateDynamicCalculation(template:string, directives:Arr
     };
     
     constructor(@Inject(FormBuilder) fb:FormBuilder,
-                @Inject(CalculationService) private _calculateService: CalculationService) {
-      
+                @Inject(CalculationService) private _calculateService: CalculationService,
+                @Inject(InstanceService) private _instanceService: InstanceService) {
+                  
       this.scratchpadForm = fb.group({
-        "d": ["", Validators.required],
-        "fy": ["500", Validators.required]
+        "d": [instance.values.d || "12", Validators.required],
+        "fy": [instance.values.fy || "500", Validators.required]
       });
       
       this.scratchpadForm
@@ -72,6 +74,10 @@ export default function CreateDynamicCalculation(template:string, directives:Arr
             this.output.status = result.status;
             this.output.message = JSON.stringify(result.values);
           });
+          
+      this._instanceService
+          .saveInstance(instance._id, { values: this.scratchpadForm.value })
+          .subscribe();
     }
   };
   

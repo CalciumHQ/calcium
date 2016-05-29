@@ -46,6 +46,20 @@ instanceSchema.static('createInstance', (instance:Object):Promise<any> => {
     });
 });
 
+instanceSchema.static('saveInstance', (id:String, instance:Object):Promise<any> => {
+    return new Promise((resolve:Function, reject:Function) => {
+        let _query = { _id: id };
+
+        Instance
+          .findOneAndUpdate(_query, instance, { new: true })
+          .populate('template')
+          .exec((err, instance) => {
+              err ? reject(err)
+                  : resolve(instance);
+          });
+    });
+});
+
 let Instance = mongoose.model('Instance', instanceSchema);
 
 export default Instance;

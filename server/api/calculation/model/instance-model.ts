@@ -10,10 +10,14 @@ var schema = new mongoose.Schema({
     ref: 'Template',
     required: true
   },
+  values: {
+    type: Object,
+    default: {}
+  },
   createdAt: {
     type: Date, 
     default: Date.now
   }
-});
+}, { minimize: false });
 
 export default schema;
