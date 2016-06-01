@@ -5,12 +5,13 @@ import {
 } from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
+import {ActionBar} from '../../action-bar/components/action-bar';
 
 import {InstanceService} from '../../calculation/services/instance-service';
 
 @Component({
   selector: 'dashboard-view',
-  directives: [RouterLink],
+  directives: [RouterLink, ActionBar],
   templateUrl: 'client/dev/dashboard/templates/dashboard-view.html',
   styleUrls: ['client/dev/dashboard/styles/dashboard-view.css'],
   providers: [InstanceService]

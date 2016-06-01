@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
+var action_bar_1 = require('../../action-bar/components/action-bar');
 var instance_service_1 = require('../../calculation/services/instance-service');
 var DashboardView = (function () {
     function DashboardView(_instanceService) {
@@ -33,7 +34,7 @@ var DashboardView = (function () {
     DashboardView = __decorate([
         core_1.Component({
             selector: 'dashboard-view',
-            directives: [router_1.RouterLink],
+            directives: [router_1.RouterLink, action_bar_1.ActionBar],
             templateUrl: 'client/dev/dashboard/templates/dashboard-view.html',
             styleUrls: ['client/dev/dashboard/styles/dashboard-view.css'],
             providers: [instance_service_1.InstanceService]
