@@ -1,0 +1,47 @@
+<form class="scratchpad-form" [ngFormModel]="scratchpadForm">
+  <div class="form-group">
+    <label for="">Beam breadth</label>
+    <div class="input-group">
+      <input ngControl="b" type="number" placeholder="400" class="form-control">
+      <span class="input-group-addon">mm</span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="">Beam depth</label>
+    <div class="input-group">
+      <input ngControl="d" type="number" placeholder="600" class="form-control">
+      <span class="input-group-addon">mm</span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="">Concrete strength</label>
+    <div class="input-group">
+      <input ngControl="f_c" type="number" placeholder="32" class="form-control">
+      <span class="input-group-addon">MPa</span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="">Area of tensile steel</label>
+    <div class="input-group">
+      <input ngControl="A_st" type="number" placeholder="900" class="form-control">
+      <span class="input-group-addon">mm<sup>2</sup></span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="">Yield strength of tensile steel</label>
+    <div class="input-group">
+      <input ngControl="f_y" type="number" placeholder="500" class="form-control">
+      <span class="input-group-addon">MPa</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Moment capacity</label>
+    <p><latex>M_u = {{ output.values.M_u / 1000000 | round:2 }} kNm</latex></p>
+    <p><latex>\phi M_u = {{ output.values.phi_M_u / 1000000 | round:2 }} kNm</latex></p>
+  </div>
+</form>

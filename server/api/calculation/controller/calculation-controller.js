@@ -37,10 +37,16 @@ var CalculationController = (function () {
                 }
             });
         }
-        py
-            .send({ command: 'set_calculation', args: { value: 'ConcreteBeam' } })
-            .send({ command: 'execute' })
-            .end();
+        try {
+            py
+                .send({ command: 'set_calculation', args: { value: 'ConcreteBeam' } })
+                .send({ command: 'execute' })
+                .end();
+        }
+        catch (e) {
+            console.log('foooooo');
+            console.log(e);
+        }
     };
     return CalculationController;
 }());

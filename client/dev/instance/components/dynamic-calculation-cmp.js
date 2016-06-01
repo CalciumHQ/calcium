@@ -26,14 +26,16 @@ function CreateDynamicCalculation(template, instance, directives) {
                 status: 'default',
                 message: '',
                 values: {
-                    Ag: 0,
-                    Nt: 0,
-                    phi_Nt: 0
+                    M_u: 0,
+                    phi_M_u: 0
                 }
             };
             this.scratchpadForm = fb.group({
-                "d": [instance.values.d || "12", common_1.Validators.required],
-                "fy": [instance.values.fy || "500", common_1.Validators.required]
+                "b": [instance.values.b || "400", common_1.Validators.required],
+                "d": [instance.values.d || "600", common_1.Validators.required],
+                "f_c": [instance.values.f_c || "32", common_1.Validators.required],
+                "A_st": [instance.values.A_st || "", common_1.Validators.required],
+                "f_y": [instance.values.f_y || "500", common_1.Validators.required]
             });
             this.scratchpadForm
                 .valueChanges
@@ -50,8 +52,11 @@ function CreateDynamicCalculation(template, instance, directives) {
             }
             this._calculateService
                 .calculate({
+                b: parseInt(this.scratchpadForm.value.b),
                 d: parseInt(this.scratchpadForm.value.d),
-                fy: parseInt(this.scratchpadForm.value.fy)
+                f_c: parseInt(this.scratchpadForm.value.f_c),
+                A_st: parseInt(this.scratchpadForm.value.A_st),
+                f_y: parseInt(this.scratchpadForm.value.f_y)
             }, this.scratchpadForm.value.expression)
                 .subscribe(function (result) {
                 _this.output.values = result.values;

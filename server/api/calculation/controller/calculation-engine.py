@@ -55,4 +55,6 @@ for line in sys.stdin:
       
     except TypeError, Message:
       error(str(Message))
-    
+      
+    except KeyError, Message:
+      error(str(Message) + " was not provided as an input variable")

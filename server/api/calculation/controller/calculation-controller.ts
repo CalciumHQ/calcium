@@ -39,7 +39,7 @@ export class CalculationController {
         } 
       });
       
-      for (var name in _values) {
+      for (var name in _values) { 
         
         py.send({
           command: 'set_var',
@@ -50,9 +50,19 @@ export class CalculationController {
         });
       }
       
-      py
-        .send({ command: 'set_calculation', args: { value: 'ConcreteBeam' } })
-        .send({ command: 'execute' })
-        .end();
+      try {
+        
+        py
+          .send({ command: 'set_calculation', args: { value: 'ConcreteBeam' } })
+          .send({ command: 'execute' })
+          .end();
+      }
+      
+      catch(e) {
+        
+        console.log('foooooo');
+        console.log(e); 
+      }
+      
   }
 }
