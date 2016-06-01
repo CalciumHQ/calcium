@@ -43,6 +43,17 @@ export class InstanceService {
                .map((r) => r.json());
   }
   
+  add(instance:Object):Observable<any> {
+    let headers = new Headers();
+    let stringified = JSON.stringify(instance);
+
+    headers.append('Content-Type', 'application/json');
+
+    return this._http
+               .post(InstanceService.ENDPOINT.replace(':id', ''), stringified, {headers})
+               .map((r) => r.json());
+  }
+  
   saveInstance(id:string, instance:Object):Observable<any> {
     let headers = new Headers();
     let stringified = JSON.stringify(instance);

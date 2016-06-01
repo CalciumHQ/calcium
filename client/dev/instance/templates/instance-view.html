@@ -1,3 +1,13 @@
+<action-bar>
+  <div class="container">
+    <a class="navigation-link" [routerLink]="['Dashboard']">
+      <span class="glyphicon glyphicon-chevron-left"></span> Dashboard
+    </a>
+    
+    <button class="btn btn-default pull-right">Print</button>
+  </div>
+</action-bar>
+
 <div class="page-header">
   <div class="container">
     <h2 *ngIf="instance">{{ instance.name }} <small>{{ instance.template.name }}</small></h2>

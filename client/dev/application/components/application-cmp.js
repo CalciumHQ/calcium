@@ -12,6 +12,7 @@ var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
 var header_cmp_1 = require('../../header/components/header-cmp');
 var dashboard_view_1 = require('../../dashboard/components/dashboard-view');
+var new_instance_view_1 = require('../../instance/components/new-instance-view');
 var instance_view_1 = require('../../instance/components/instance-view');
 var login_form_1 = require('../../login/components/login-form');
 var auth_service_1 = require('../../auth/services/auth-service');
@@ -29,6 +30,7 @@ var ApplicationCmp = (function () {
         router_1.RouteConfig([
             { name: 'Login', path: '/login', component: login_form_1.LoginForm },
             { name: 'Dashboard', path: '/dashboard', component: dashboard_view_1.DashboardView },
+            { name: 'NewInstance', path: '/calculation/new', component: new_instance_view_1.NewInstanceView },
             { name: 'Instance', path: '/calculation/:id', component: instance_view_1.InstanceView }
         ]), 
         __metadata('design:paramtypes', [])

@@ -14,6 +14,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require('angular2/core');
 var common_1 = require('angular2/common');
 var router_1 = require('angular2/router');
+var router_2 = require('angular2/router');
+var action_bar_1 = require('../../action-bar/components/action-bar');
 var instance_service_1 = require('../../calculation/services/instance-service');
 var calculation_service_1 = require("../../calculation/services/calculation-service");
 var dynamic_calculation_container_1 = require('./dynamic-calculation-container');
@@ -43,7 +45,7 @@ var InstanceView = (function () {
             templateUrl: 'client/dev/instance/templates/instance-view.html',
             styleUrls: ['client/dev/instance/styles/instance-view.css'],
             providers: [instance_service_1.InstanceService, calculation_service_1.CalculationService],
-            directives: [dynamic_calculation_container_1.DynamicCalculationContainer]
+            directives: [router_2.RouterLink, action_bar_1.ActionBar, dynamic_calculation_container_1.DynamicCalculationContainer]
         }),
         __param(0, core_1.Inject(common_1.FormBuilder)),
         __param(1, core_1.Inject(router_1.RouteParams)),

@@ -22,6 +22,9 @@ import {
   RouteParams
 } from 'angular2/router';
 
+import {RouterLink} from 'angular2/router';
+import {ActionBar} from '../../action-bar/components/action-bar';
+
 import {InstanceService} from '../../calculation/services/instance-service';
 import {CalculationService} from "../../calculation/services/calculation-service";
 import {DynamicCalculationContainer} from './dynamic-calculation-container';
@@ -31,7 +34,7 @@ import {DynamicCalculationContainer} from './dynamic-calculation-container';
   templateUrl: 'client/dev/instance/templates/instance-view.html',
   styleUrls: ['client/dev/instance/styles/instance-view.css'],
   providers: [InstanceService, CalculationService],
-  directives: [DynamicCalculationContainer]
+  directives: [RouterLink, ActionBar, DynamicCalculationContainer]
 })
 export class InstanceView implements OnInit {
   
