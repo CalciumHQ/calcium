@@ -13,6 +13,7 @@ var common_1 = require('angular2/common');
 var router_1 = require('angular2/router');
 var calculation_service_1 = require("../../calculation/services/calculation-service");
 var instance_service_1 = require("../../calculation/services/instance-service");
+var latex_component_1 = require('../../calculation/components/latex-component');
 var dynamic_calculation_cmp_1 = require('./dynamic-calculation-cmp');
 var DynamicCalculationContainer = (function () {
     function DynamicCalculationContainer(loader, viewContainerRef, _params, _instanceService) {
@@ -31,7 +32,7 @@ var DynamicCalculationContainer = (function () {
             .subscribe(function (template) {
             _this.templateHtml = template;
             var resolvedProviders = core_1.ReflectiveInjector.resolve([common_1.FORM_PROVIDERS, calculation_service_1.CalculationService]);
-            _this.loader.loadNextToLocation(dynamic_calculation_cmp_1.default(_this.templateHtml, _this.instance, [common_1.FORM_DIRECTIVES]), _this.viewContainerRef, resolvedProviders);
+            _this.loader.loadNextToLocation(dynamic_calculation_cmp_1.default(_this.templateHtml, _this.instance, [common_1.FORM_DIRECTIVES, latex_component_1.LatexComponent]), _this.viewContainerRef, resolvedProviders);
         });
     };
     __decorate([

@@ -21,7 +21,10 @@ var HeaderCmp = (function () {
     HeaderCmp.prototype.ngOnInit = function () {
         var _this = this;
         this._authService.currentUser
-            .subscribe(function (u) { return _this.user = u; });
+            .subscribe(function (u) {
+            console.log(u);
+            _this.user = u;
+        });
     };
     HeaderCmp.prototype.logout = function () {
         this._authService

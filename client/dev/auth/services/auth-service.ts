@@ -67,6 +67,7 @@ export class AuthService {
     this._http
         .get(AuthService.USER_ENDPOINT, {headers})
         .map((r) => r.json())
+        .catch((e, o) => Observable.empty())
         .subscribe((r) => this.currentUserSource.next(r));
   }
 }

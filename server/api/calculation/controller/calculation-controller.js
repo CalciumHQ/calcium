@@ -38,7 +38,7 @@ var CalculationController = (function () {
             });
         }
         py
-            .send({ command: 'set_calculation', args: { value: 'TestCalculation' } })
+            .send({ command: 'set_calculation', args: { value: 'ConcreteBeam' } })
             .send({ command: 'execute' })
             .end();
     };

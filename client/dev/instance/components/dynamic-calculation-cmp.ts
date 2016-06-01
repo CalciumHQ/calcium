@@ -27,7 +27,7 @@ export default function CreateDynamicCalculation(template:string, instance: any,
     pipes: [Round],
     template,
   })
-  class DynamicCalculationComponent {
+  class DynamicCalculationComponent implements OnInit {
     
     scratchpadForm: ControlGroup;
   
@@ -56,6 +56,10 @@ export default function CreateDynamicCalculation(template:string, instance: any,
           .distinctUntilChanged()
           .subscribe(() => this.calculate());
       }
+      
+    ngOnInit() {
+      
+    }
     
     public calculate() {
       

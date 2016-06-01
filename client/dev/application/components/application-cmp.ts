@@ -22,5 +22,4 @@ import 'rxjs/Rx'
   { name: 'Instance', path: '/calculation/:id', component: InstanceView }
 ])
 export class ApplicationCmp {
-  
 }

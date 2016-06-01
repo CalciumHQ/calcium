@@ -24,7 +24,10 @@ export class HeaderCmp implements OnInit {
   ngOnInit() {
     
     this._authService.currentUser
-        .subscribe((u) => this.user = u); 
+        .subscribe((u) => {
+          console.log(u);
+          this.user = u;
+        }); 
   }
   
   logout() {

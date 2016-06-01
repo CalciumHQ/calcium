@@ -18,6 +18,7 @@ import {
 
 import {CalculationService} from "../../calculation/services/calculation-service";
 import {InstanceService} from "../../calculation/services/instance-service";
+import {LatexComponent} from '../../calculation/components/latex-component';
 import createDynamicCalculation from './dynamic-calculation-cmp';
 
 @Component({
@@ -48,7 +49,7 @@ export class DynamicCalculationContainer implements OnInit {
           
           let resolvedProviders = ReflectiveInjector.resolve([FORM_PROVIDERS, CalculationService]);
           this.loader.loadNextToLocation(
-            createDynamicCalculation(this.templateHtml, this.instance, [FORM_DIRECTIVES]),
+            createDynamicCalculation(this.templateHtml, this.instance, [FORM_DIRECTIVES, LatexComponent]),
             this.viewContainerRef,
             resolvedProviders
           )

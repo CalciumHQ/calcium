@@ -12,6 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = require('angular2/core');
+var Observable_1 = require('rxjs/Observable');
 var Subject_1 = require('rxjs/Subject');
 var http_1 = require('angular2/http');
 require('rxjs/add/operator/map');
@@ -52,6 +53,7 @@ var AuthService = (function () {
         this._http
             .get(AuthService.USER_ENDPOINT, { headers: headers })
             .map(function (r) { return r.json(); })
+            .catch(function (e, o) { return Observable_1.Observable.empty(); })
             .subscribe(function (r) { return _this.currentUserSource.next(r); });
     };
     AuthService.LOGIN_ENDPOINT = '/auth/login';

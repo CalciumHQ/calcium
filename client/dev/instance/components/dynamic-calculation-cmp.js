@@ -41,6 +41,8 @@ function CreateDynamicCalculation(template, instance, directives) {
                 .distinctUntilChanged()
                 .subscribe(function () { return _this.calculate(); });
         }
+        DynamicCalculationComponent.prototype.ngOnInit = function () {
+        };
         DynamicCalculationComponent.prototype.calculate = function () {
             var _this = this;
             if (!this.scratchpadForm.valid) {
