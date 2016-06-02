@@ -5,6 +5,7 @@ var CalculationController = (function () {
     }
     CalculationController.createCalculation = function (req, res) {
         var _inputs = req.body.inputs;
+        var _calculation = req.body.calculation;
         var outputs = {};
         var py = new Python('./server/api/calculation/controller/calculation-engine.py', { mode: 'json' });
         py.on('message', function (m) {
@@ -39,7 +40,7 @@ var CalculationController = (function () {
         }
         try {
             py
-                .send({ command: 'set_calculation', args: { value: 'ConcreteBeam' } })
+                .send({ command: 'set_calculation', args: { value: _calculation } })
                 .send({ command: 'execute' })
                 .end();
         }

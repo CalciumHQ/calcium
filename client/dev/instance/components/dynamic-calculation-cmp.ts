@@ -75,7 +75,7 @@ export default function CreateDynamicCalculation(template:string, instance: any,
       }
       
       this._calculateService
-          .calculate(inputs, this.scratchpadForm.value.expression)
+          .calculate(inputs, instance.template.calculation)
           .subscribe((result) => {
             this.output.outputs = result.outputs;
             this.output.status = result.status;

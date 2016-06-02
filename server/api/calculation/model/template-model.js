@@ -5,6 +5,10 @@ var schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    calculation: {
+        type: String,
+        required: true
+    },
     templateUrl: {
         type: String,
         required: true

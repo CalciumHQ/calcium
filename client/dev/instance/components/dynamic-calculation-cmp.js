@@ -56,7 +56,7 @@ function CreateDynamicCalculation(template, instance, directives) {
                 inputs[key] = parseInt(this.scratchpadForm.value[key]);
             }
             this._calculateService
-                .calculate(inputs, this.scratchpadForm.value.expression)
+                .calculate(inputs, instance.template.calculation)
                 .subscribe(function (result) {
                 _this.output.outputs = result.outputs;
                 _this.output.status = result.status;

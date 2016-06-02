@@ -27,6 +27,7 @@ var DynamicCalculationContainer = (function () {
     };
     DynamicCalculationContainer.prototype._loadTemplate = function () {
         var _this = this;
+        console.log(this._instanceService);
         this._instanceService
             .getTemplate(this.instance.template.templateUrl)
             .subscribe(function (template) {

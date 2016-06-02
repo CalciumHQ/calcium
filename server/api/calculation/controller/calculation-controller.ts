@@ -6,6 +6,7 @@ export class CalculationController {
   static createCalculation(req: express.Request, res: express.Response):void {
     
       let _inputs = req.body.inputs;
+      let _calculation = req.body.calculation;
       var outputs = {};
       
       let py = new Python(
@@ -53,7 +54,7 @@ export class CalculationController {
       try {
         
         py
-          .send({ command: 'set_calculation', args: { value: 'ConcreteBeam' } })
+          .send({ command: 'set_calculation', args: { value: _calculation } })
           .send({ command: 'execute' })
           .end();
       }

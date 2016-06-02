@@ -23,9 +23,9 @@ export class CalculationService {
 
   }
 
-  calculate(inputs:Object, expression:string):Observable<any> {
+  calculate(inputs:Object, calculation:string):Observable<any> {
     let _stringified = JSON.stringify({
-      expression: expression,
+      calculation: calculation,
       inputs: inputs
     });
 

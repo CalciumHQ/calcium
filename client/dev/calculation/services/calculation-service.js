@@ -18,9 +18,9 @@ var CalculationService = (function () {
     function CalculationService(_http) {
         this._http = _http;
     }
-    CalculationService.prototype.calculate = function (inputs, expression) {
+    CalculationService.prototype.calculate = function (inputs, calculation) {
         var _stringified = JSON.stringify({
-            expression: expression,
+            calculation: calculation,
             inputs: inputs
         });
         var headers = new http_1.Headers();
