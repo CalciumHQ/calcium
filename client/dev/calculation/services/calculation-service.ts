@@ -23,10 +23,10 @@ export class CalculationService {
 
   }
 
-  calculate(values:Object, expression:string):Observable<any> {
+  calculate(inputs:Object, expression:string):Observable<any> {
     let _stringified = JSON.stringify({
       expression: expression,
-      values: values
+      inputs: inputs
     });
 
     let headers = new Headers();

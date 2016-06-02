@@ -4,18 +4,18 @@ var CalculationController = (function () {
     function CalculationController() {
     }
     CalculationController.createCalculation = function (req, res) {
-        var _values = req.body.values;
-        var output = {};
+        var _inputs = req.body.inputs;
+        var outputs = {};
         var py = new Python('./server/api/calculation/controller/calculation-engine.py', { mode: 'json' });
         py.on('message', function (m) {
             switch (m.status) {
                 case 'success':
                     for (var attrname in m.values) {
-                        output[attrname] = m.values[attrname];
+                        outputs[attrname] = m.values[attrname];
                     }
                     var _data = {
                         status: 'success',
-                        values: output
+                        outputs: outputs
                     };
                     res.json(_data);
                     break;
@@ -28,12 +28,12 @@ var CalculationController = (function () {
                     break;
             }
         });
-        for (var name in _values) {
+        for (var name in _inputs) {
             py.send({
                 command: 'set_var',
                 args: {
                     name: name,
-                    value: _values[name]
+                    value: _inputs[name]
                 }
             });
         }
@@ -44,7 +44,6 @@ var CalculationController = (function () {
                 .end();
         }
         catch (e) {
-            console.log('foooooo');
             console.log(e);
         }
     };

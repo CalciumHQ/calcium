@@ -34,23 +34,22 @@ export default function CreateDynamicCalculation(template:string, instance: any,
     public output = {
       status: 'default',
       message: '',
-      values: {
-        M_u: 0,
-        phi_M_u: 0
-      }
+      outputs: instance.outputs
     };
     
     constructor(@Inject(FormBuilder) fb:FormBuilder,
                 @Inject(CalculationService) private _calculateService: CalculationService,
                 @Inject(InstanceService) private _instanceService: InstanceService) {
-                  
-      this.scratchpadForm = fb.group({
-        "b": [instance.values.b || "400", Validators.required],
-        "d": [instance.values.d || "600", Validators.required],
-        "f_c": [instance.values.f_c || "32", Validators.required],
-        "A_st": [instance.values.A_st || "", Validators.required],
-        "f_y": [instance.values.f_y || "500", Validators.required]
-      });
+      
+      let controlHash = {};
+      for (let key of Object.keys(instance.template.inputs)) {
+        let def = [instance.inputs[key] || instance.template.inputs[key].default];
+        if (instance.template.inputs[key].required) { 
+          def.push(Validators.required); 
+        }
+        controlHash[key] = def;
+      }            
+      this.scratchpadForm = fb.group(controlHash);
       
       this.scratchpadForm
           .valueChanges
@@ -70,22 +69,21 @@ export default function CreateDynamicCalculation(template:string, instance: any,
         return; 
       }
       
+      let inputs = {};
+      for (let key of Object.keys(instance.template.inputs)) {
+        inputs[key] = parseInt(this.scratchpadForm.value[key]);
+      }
+      
       this._calculateService
-          .calculate({
-            b: parseInt(this.scratchpadForm.value.b),
-            d: parseInt(this.scratchpadForm.value.d),
-            f_c: parseInt(this.scratchpadForm.value.f_c),
-            A_st: parseInt(this.scratchpadForm.value.A_st),
-            f_y: parseInt(this.scratchpadForm.value.f_y)
-          }, this.scratchpadForm.value.expression)
+          .calculate(inputs, this.scratchpadForm.value.expression)
           .subscribe((result) => {
-            this.output.values = result.values;
+            this.output.outputs = result.outputs;
             this.output.status = result.status;
             this.output.message = JSON.stringify(result.values);
           });
           
       this._instanceService
-          .saveInstance(instance._id, { values: this.scratchpadForm.value })
+          .saveInstance(instance._id, { inputs: this.scratchpadForm.value, outputs: this.output.outputs })
           .subscribe();
     }
   };

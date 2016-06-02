@@ -10,7 +10,11 @@ var schema = new mongoose.Schema({
     ref: 'Template',
     required: true
   },
-  values: {
+  inputs: {
+    type: Object,
+    default: {}
+  },
+  outputs: {
     type: Object,
     default: {}
   },

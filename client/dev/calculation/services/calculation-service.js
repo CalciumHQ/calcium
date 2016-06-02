@@ -18,10 +18,10 @@ var CalculationService = (function () {
     function CalculationService(_http) {
         this._http = _http;
     }
-    CalculationService.prototype.calculate = function (values, expression) {
+    CalculationService.prototype.calculate = function (inputs, expression) {
         var _stringified = JSON.stringify({
             expression: expression,
-            values: values
+            inputs: inputs
         });
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');

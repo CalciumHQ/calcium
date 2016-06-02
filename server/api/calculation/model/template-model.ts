@@ -12,7 +12,15 @@ var schema = new mongoose.Schema({
   createdAt: {
     type: Date, 
     default: Date.now
+  },
+  inputs: {
+    type: Object,
+    default: {}
+  },
+  outputs: {
+    type: Object,
+    default: {}
   }
-});
+}, { minimize: false });
 
 export default schema;

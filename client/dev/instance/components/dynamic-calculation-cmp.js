@@ -25,18 +25,18 @@ function CreateDynamicCalculation(template, instance, directives) {
             this.output = {
                 status: 'default',
                 message: '',
-                values: {
-                    M_u: 0,
-                    phi_M_u: 0
-                }
+                outputs: instance.outputs
             };
-            this.scratchpadForm = fb.group({
-                "b": [instance.values.b || "400", common_1.Validators.required],
-                "d": [instance.values.d || "600", common_1.Validators.required],
-                "f_c": [instance.values.f_c || "32", common_1.Validators.required],
-                "A_st": [instance.values.A_st || "", common_1.Validators.required],
-                "f_y": [instance.values.f_y || "500", common_1.Validators.required]
-            });
+            var controlHash = {};
+            for (var _i = 0, _a = Object.keys(instance.template.inputs); _i < _a.length; _i++) {
+                var key = _a[_i];
+                var def = [instance.inputs[key] || instance.template.inputs[key].default];
+                if (instance.template.inputs[key].required) {
+                    def.push(common_1.Validators.required);
+                }
+                controlHash[key] = def;
+            }
+            this.scratchpadForm = fb.group(controlHash);
             this.scratchpadForm
                 .valueChanges
                 .debounceTime(400)
@@ -50,21 +50,20 @@ function CreateDynamicCalculation(template, instance, directives) {
             if (!this.scratchpadForm.valid) {
                 return;
             }
+            var inputs = {};
+            for (var _i = 0, _a = Object.keys(instance.template.inputs); _i < _a.length; _i++) {
+                var key = _a[_i];
+                inputs[key] = parseInt(this.scratchpadForm.value[key]);
+            }
             this._calculateService
-                .calculate({
-                b: parseInt(this.scratchpadForm.value.b),
-                d: parseInt(this.scratchpadForm.value.d),
-                f_c: parseInt(this.scratchpadForm.value.f_c),
-                A_st: parseInt(this.scratchpadForm.value.A_st),
-                f_y: parseInt(this.scratchpadForm.value.f_y)
-            }, this.scratchpadForm.value.expression)
+                .calculate(inputs, this.scratchpadForm.value.expression)
                 .subscribe(function (result) {
-                _this.output.values = result.values;
+                _this.output.outputs = result.outputs;
                 _this.output.status = result.status;
                 _this.output.message = JSON.stringify(result.values);
             });
             this._instanceService
-                .saveInstance(instance._id, { values: this.scratchpadForm.value })
+                .saveInstance(instance._id, { inputs: this.scratchpadForm.value, outputs: this.output.outputs })
                 .subscribe();
         };
         DynamicCalculationComponent = __decorate([

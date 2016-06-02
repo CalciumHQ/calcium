@@ -5,8 +5,8 @@ export class CalculationController {
   
   static createCalculation(req: express.Request, res: express.Response):void {
     
-      let _values = req.body.values;
-      var output = {};
+      let _inputs = req.body.inputs;
+      var outputs = {};
       
       let py = new Python(
         './server/api/calculation/controller/calculation-engine.py', 
@@ -18,18 +18,18 @@ export class CalculationController {
         switch (m.status) {
           
           case 'success':
-            for (var attrname in m.values) { output[attrname] = m.values[attrname]; }
+            for (var attrname in m.values) { outputs[attrname] = m.values[attrname]; }
             
             let _data = { 
               status: 'success',
-              values: output 
+              outputs: outputs 
             };
             
             res.json(_data);
             break;
             
           case 'error':
-            console.error(`ERROR: ${m.message}`);
+            console.error(`ERROR: ${m.message}`); 
             res.json({ message: m.message }, 500);
             break;
             
@@ -39,13 +39,13 @@ export class CalculationController {
         } 
       });
       
-      for (var name in _values) { 
+      for (var name in _inputs) { 
         
         py.send({
           command: 'set_var',
           args: {
             name: name,
-            value: _values[name]
+            value: _inputs[name]
           }
         });
       }
@@ -59,8 +59,7 @@ export class CalculationController {
       }
       
       catch(e) {
-        
-        console.log('foooooo');
+
         console.log(e); 
       }
       
