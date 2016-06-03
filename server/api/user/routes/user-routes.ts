@@ -8,5 +8,9 @@ export class UserRoutes {
       router
         .route('/api/users/me')
         .get(UserController.me);
+        
+      router
+        .route('/api/users/:id') 
+        .patch(UserController.saveUser);
     }
 }

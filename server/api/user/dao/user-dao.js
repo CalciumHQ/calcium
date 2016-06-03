@@ -27,6 +27,17 @@ user_model_1["default"].static('createUser', function (user) {
         });
     });
 });
+user_model_1["default"].static('saveUser', function (id, user) {
+    return new Promise(function (resolve, reject) {
+        var _query = { _id: id };
+        User
+            .findOneAndUpdate(_query, user, { new: true })
+            .exec(function (err, instance) {
+            err ? reject(err)
+                : resolve(instance);
+        });
+    });
+});
 user_model_1["default"].static('generateHash', function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 });

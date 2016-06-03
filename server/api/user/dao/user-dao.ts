@@ -32,6 +32,19 @@ userSchema.static('createUser', (user:Object):Promise<any> => {
     });
 });
 
+userSchema.static('saveUser', (id:String, user:Object):Promise<any> => {
+    return new Promise((resolve:Function, reject:Function) => {
+        let _query = { _id: id };
+
+        User
+          .findOneAndUpdate(_query, user, { new: true })
+          .exec((err, instance) => {
+              err ? reject(err)
+                  : resolve(instance);
+          });
+    });
+});
+
 userSchema.static('generateHash', (password:string):boolean => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 });

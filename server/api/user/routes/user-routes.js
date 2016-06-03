@@ -7,6 +7,9 @@ var UserRoutes = (function () {
         router
             .route('/api/users/me')
             .get(user_controller_1.UserController.me);
+        router
+            .route('/api/users/:id')
+            .patch(user_controller_1.UserController.saveUser);
     };
     return UserRoutes;
 }());
