@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as _ from 'lodash';
+import * as bcrypt from 'bcrypt-nodejs';
 import userSchema from '../model/user-model';
 
 userSchema.static('getOne', (params:Object):Promise<any> => {
@@ -30,6 +31,14 @@ userSchema.static('createUser', (user:Object):Promise<any> => {
       });
     });
 });
+
+userSchema.static('generateHash', (password:string):boolean => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+});
+
+userSchema.methods.validPassword = function(password) { 
+  return bcrypt.compareSync(password, this.password);
+};
 
 let User = mongoose.model('User', userSchema);
 

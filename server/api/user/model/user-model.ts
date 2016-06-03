@@ -5,6 +5,10 @@ var schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  password: {
+    type: String,
+    required: true 
+  },
   firstName: {
     type: String
   },
@@ -12,7 +16,7 @@ var schema = new mongoose.Schema({
     type: String
   },
   createdAt: {
-    type: Date, 
+    type: Date,
     default: Date.now
   }
 });

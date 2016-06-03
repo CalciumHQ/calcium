@@ -8,12 +8,13 @@ import {NewInstanceView} from '../../instance/components/new-instance-view';
 import {InstanceView} from '../../instance/components/instance-view';
 import {LoginForm} from '../../login/components/login-form';
 import {AuthService} from '../../auth/services/auth-service';
+import {LoggedInRouterOutlet} from '../../router/components/router-outlet';
 
 import 'rxjs/Rx'
 
 @Component({
   selector: 'application-cmp',
-  directives: [HeaderCmp, ROUTER_DIRECTIVES],
+  directives: [HeaderCmp, LoggedInRouterOutlet],
   providers: [AuthService],
   templateUrl: 'client/dev/application/templates/application-cmp.html',
 })

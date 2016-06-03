@@ -42,7 +42,6 @@ export class DynamicCalculationContainer implements OnInit {
   }
   
   private _loadTemplate() {
-    console.log(this._instanceService);
     this._instanceService
         .getTemplate(this.instance.template.templateUrl)
         .subscribe((template) => { 

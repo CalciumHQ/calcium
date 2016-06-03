@@ -8,8 +8,15 @@ export class AuthRoutes {
     
     static init(router: express.Router) {
       router
-        .route('/auth/login')
-        .post(passport.authenticate('local'), (req: express.Request, res: express.Response) => {
+        .route('/auth/signup')
+        .post(passport.authenticate('local-signup'), (req: express.Request, res: express.Response) => {
+            
+            res.json(req.user, 200);
+        });
+        
+      router
+        .route('/auth/login') 
+        .post(passport.authenticate('local-login'), (req: express.Request, res: express.Response) => {
             
             res.json(req.user, 200);
         });

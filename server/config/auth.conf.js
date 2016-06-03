@@ -18,7 +18,7 @@ var AuthConfig = (function () {
         done(null, user._id);
     };
     AuthConfig.userDeserializer = function (id, done) {
-        user_dao_1.default['getOne']({ _id: id })
+        user_dao_1["default"]['getOne']({ _id: id })
             .then(function (user) { return done(null, user); })
             .catch(function (error) { return done(error); });
     };

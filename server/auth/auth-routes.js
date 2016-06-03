@@ -5,8 +5,13 @@ var AuthRoutes = (function () {
     }
     AuthRoutes.init = function (router) {
         router
+            .route('/auth/signup')
+            .post(passport.authenticate('local-signup'), function (req, res) {
+            res.json(req.user, 200);
+        });
+        router
             .route('/auth/login')
-            .post(passport.authenticate('local'), function (req, res) {
+            .post(passport.authenticate('local-login'), function (req, res) {
             res.json(req.user, 200);
         });
         router
