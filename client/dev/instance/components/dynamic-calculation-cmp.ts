@@ -2,7 +2,7 @@ import {
   Component,
   Inject,
   OnInit
-} from 'angular2/core';
+} from '@angular/core';
 
 import {
   FormBuilder,
@@ -11,7 +11,7 @@ import {
   Control,
   FORM_DIRECTIVES,
   FORM_PROVIDERS
-} from 'angular2/common';
+} from '@angular/common';
 
 import Round from "../pipes/round";
 

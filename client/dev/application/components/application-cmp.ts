@@ -1,6 +1,5 @@
 
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+import {Component} from '@angular/core';
 
 import {HeaderCmp} from '../../header/components/header-cmp';
 import {DashboardView} from '../../dashboard/components/dashboard-view';
@@ -9,6 +8,8 @@ import {InstanceView} from '../../instance/components/instance-view';
 import {LoginForm} from '../../login/components/login-form';
 import {AuthService} from '../../auth/services/auth-service';
 import {LoggedInRouterOutlet} from '../../router/components/router-outlet';
+
+import {ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
 
 import 'rxjs/Rx'
 

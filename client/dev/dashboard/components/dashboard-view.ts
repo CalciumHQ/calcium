@@ -2,9 +2,9 @@ import {
   Component,
   Inject,
   OnInit
-} from 'angular2/core';
+} from '@angular/core';
 
-import {RouterLink} from 'angular2/router';
+import {RouterLink} from '@angular/router-deprecated';
 import {ActionBar} from '../../action-bar/components/action-bar';
 
 import {InstanceService} from '../../calculation/services/instance-service';

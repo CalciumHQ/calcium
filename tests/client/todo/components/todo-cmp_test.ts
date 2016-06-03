@@ -8,11 +8,11 @@ import {
   injectAsync,
   TestComponentBuilder,
   beforeEachProviders
-} from 'angular2/testing';
+} from '@angular/testing';
 
 import {
   provide
-} from 'angular2/core';
+} from '@angular/core';
 
 import {
   Observable

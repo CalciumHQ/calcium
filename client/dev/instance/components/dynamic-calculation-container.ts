@@ -5,16 +5,16 @@ import {
   ViewContainerRef,
   ReflectiveInjector,
   OnInit
-} from 'angular2/core';
+} from '@angular/core';
 
 import {
   FORM_DIRECTIVES,
   FORM_PROVIDERS
-} from 'angular2/common';
+} from '@angular/common';
 
 import {
   RouteParams
-} from 'angular2/router';
+} from '@angular/router-deprecated';
 
 import {CalculationService} from "../../calculation/services/calculation-service";
 import {InstanceService} from "../../calculation/services/instance-service";

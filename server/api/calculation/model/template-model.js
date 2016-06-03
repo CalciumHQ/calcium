@@ -26,5 +26,5 @@ var schema = new mongoose.Schema({
         default: {}
     }
 }, { minimize: false });
-exports.__esModule = true;
-exports["default"] = schema;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = schema;

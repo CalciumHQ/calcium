@@ -1,18 +1,18 @@
 import {
   Component,
   Inject
-} from 'angular2/core';
+} from '@angular/core';
 
 import {
   FormBuilder,
   Validators,
   ControlGroup,
   Control
-} from 'angular2/common';
+} from '@angular/common';
 
 import {
   Router
-} from 'angular2/router';
+} from '@angular/router-deprecated';
 
 import {AuthService} from '../../auth/services/auth-service';
 

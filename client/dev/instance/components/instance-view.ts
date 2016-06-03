@@ -7,7 +7,7 @@ import {
   Provider,
   ReflectiveInjector,
   OnInit
-} from 'angular2/core';
+} from '@angular/core';
 
 import {
   FormBuilder,
@@ -16,13 +16,13 @@ import {
   Control,
   FORM_DIRECTIVES,
   FORM_PROVIDERS
-} from 'angular2/common';
+} from '@angular/common';
 
 import {
   RouteParams
-} from 'angular2/router';
+} from '@angular/router-deprecated';
 
-import {RouterLink} from 'angular2/router';
+import {RouterLink} from '@angular/router-deprecated';
 import {ActionBar} from '../../action-bar/components/action-bar';
 
 import {InstanceService} from '../../calculation/services/instance-service';

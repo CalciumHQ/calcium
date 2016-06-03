@@ -5,8 +5,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var testing_1 = require('angular2/testing');
-var core_1 = require('angular2/core');
+var testing_1 = require('@angular/testing');
+var core_1 = require('@angular/core');
 var Observable_1 = require('rxjs/Observable');
 var todo_cmp_1 = require('../../../../client/dev/todo/components/todo-cmp');
 var todo_service_1 = require('../../../../client/dev/todo/services/todo-service');

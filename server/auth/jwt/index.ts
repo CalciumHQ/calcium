@@ -1,27 +1,24 @@
 
 import * as passport from 'passport';
-import * as jwt from 'jwt-simple';
-import {Strategy} from 'passport-local';
+import {Strategy} from 'passport-jwt';
 import UserDAO from '../../api/user/dao/user-dao';
 
-export class LocalStrategy {
-  
-  private static SECRET = 'jk34ty89jlarhgi24g89h432q9324gl9'; 
+export class JwtStrategy {
 
   static register() {
     
-    passport.use('local-signup', new Strategy({
+    passport.use('jwt-signup', new Strategy({
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true
-      }, (req, email, password, done) => {
+      }, function(req, email, password, done) {
         
         UserDAO
           ['findOne']({ email: email })
           .then(user => {
             
             if (user) {
-              return done(null, false);
+              done(null, false);
             }
             
             UserDAO
@@ -30,8 +27,7 @@ export class LocalStrategy {
                 password: UserDAO['generateHash'](password)
               })
               .then(user => {
-                let token = jwt.encode({ user: user }, this.SECRET);
-                return done(null, token);
+                done(null, user);
               })
               .catch(error => done(error));
           })
@@ -39,26 +35,25 @@ export class LocalStrategy {
       }
     ));
   
-    passport.use('local-login', new Strategy({
+    passport.use('jwt-login', new Strategy({
         usernameField: 'email',
-        passwordField: 'password' 
+        passwordField: 'password'
       }, 
-      (email, password, done) => {
+      function(email, password, done) {
         
         UserDAO
           ['findOne']({ email: email })
           .then(user => {
             
             if (!user) {
-              return done(null, false);
+              done(null, false);
             }
             
             if (!user.validPassword(password)) {
-              return done(null, false);
+              done(null, false);
             }
             
-            let token = jwt.encode({ user: user }, this.SECRET);
-            return done(null, token);
+            done(null, user);
           })
           .catch(error => done(error)); 
       }

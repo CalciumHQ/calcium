@@ -1,14 +1,12 @@
 "use strict";
 var passport = require('passport');
-var jwt = require('jwt-simple');
-var passport_local_1 = require('passport-local');
+var passport_jwt_1 = require('passport-jwt');
 var user_dao_1 = require('../../api/user/dao/user-dao');
-var LocalStrategy = (function () {
-    function LocalStrategy() {
+var JwtStrategy = (function () {
+    function JwtStrategy() {
     }
-    LocalStrategy.register = function () {
-        var _this = this;
-        passport.use('local-signup', new passport_local_1.Strategy({
+    JwtStrategy.register = function () {
+        passport.use('jwt-signup', new passport_jwt_1.Strategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true
@@ -16,39 +14,36 @@ var LocalStrategy = (function () {
             user_dao_1.default['findOne']({ email: email })
                 .then(function (user) {
                 if (user) {
-                    return done(null, false);
+                    done(null, false);
                 }
                 user_dao_1.default['createUser']({
                     email: email,
                     password: user_dao_1.default['generateHash'](password)
                 })
                     .then(function (user) {
-                    var token = jwt.encode({ user: user }, _this.SECRET);
-                    return done(null, token);
+                    done(null, user);
                 })
                     .catch(function (error) { return done(error); });
             })
                 .catch(function (error) { return done(error); });
         }));
-        passport.use('local-login', new passport_local_1.Strategy({
+        passport.use('jwt-login', new passport_jwt_1.Strategy({
             usernameField: 'email',
             passwordField: 'password'
         }, function (email, password, done) {
             user_dao_1.default['findOne']({ email: email })
                 .then(function (user) {
                 if (!user) {
-                    return done(null, false);
+                    done(null, false);
                 }
                 if (!user.validPassword(password)) {
-                    return done(null, false);
+                    done(null, false);
                 }
-                var token = jwt.encode({ user: user }, _this.SECRET);
-                return done(null, token);
+                done(null, user);
             })
                 .catch(function (error) { return done(error); });
         }));
     };
-    LocalStrategy.SECRET = 'jk34ty89jlarhgi24g89h432q9324gl9';
-    return LocalStrategy;
+    return JwtStrategy;
 }());
-exports.LocalStrategy = LocalStrategy;
+exports.JwtStrategy = JwtStrategy;

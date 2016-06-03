@@ -1,34 +1,72 @@
 import {
-  Inject
-} from 'angular2/core';
+  Inject,
+  Injectable
+} from '@angular/core';
 
 import {
   Observable
 } from 'rxjs/Observable';
 
 import {
-  Subject
-} from 'rxjs/Subject';
+  BehaviorSubject
+} from 'rxjs/BehaviorSubject';
 
 import {
   Http,
   Headers
-} from 'angular2/http';
+} from '@angular/http';
+
+import {
+  AuthHttp, 
+  AuthConfig, 
+  JwtHelper
+} from 'angular2-jwt';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
+@Injectable()
 export class AuthService {
   static LOGIN_ENDPOINT: string = '/auth/login';
   static LOGOUT_ENDPOINT: string = '/auth/logout';
   static USER_ENDPOINT: string = '/api/users/me';
   
-  private currentUserSource = new Subject<Object>();
-  public currentUser = this.currentUserSource.asObservable();
+  private _jwtHelper: JwtHelper;
+  public currentUserSource: BehaviorSubject<Object>;
+  public currentUser: Observable<Object>;
 
-  constructor(@Inject(Http) private _http: Http) {
+  constructor(
+    @Inject(Http) private _http: Http
+  ) {
 
+    this._jwtHelper = new JwtHelper();
+    
+    var user: Object;
+    let storedToken = this.getJwt();
+    
+    if (storedToken) {
+      try {
+        user = this._jwtHelper.decodeToken(storedToken).user;  
+      }
+      catch (e) {}
+    }
+    
+    this.currentUserSource = new BehaviorSubject<Object>(user);
+    this.currentUser = this.currentUserSource.asObservable();
+    
     this.checkCurrentUser();
+  }
+  
+  public saveJwt(token:string) {
+    localStorage.setItem('calcium_jwt', token);
+  }
+  
+  public clearJwt() {
+    localStorage.removeItem('calcium_jwt');
+  }
+  
+  public getJwt():string {
+    return localStorage.getItem('calcium_jwt');
   }
 
   public login(email:string, password:string):Observable<any> {
@@ -38,12 +76,15 @@ export class AuthService {
     });
 
     let headers = new Headers();
+    let jwtHelper = new JwtHelper();
 
     headers.append('Content-Type', 'application/json');
 
     return this._http
                .post(AuthService.LOGIN_ENDPOINT, _dataStringified, {headers})
                .map((r) => r.json())
+               .do((r) => this.saveJwt(r))
+               .map((r) => this._jwtHelper.decodeToken(r).user)
                .do((r) => this.currentUserSource.next(r));
   }
   
@@ -56,6 +97,7 @@ export class AuthService {
     return this._http
                .get(AuthService.LOGOUT_ENDPOINT, {headers})
                .map((r) => r.json())
+               .do((r) => this.clearJwt())
                .do((r) => this.currentUserSource.next(null));
   }
   

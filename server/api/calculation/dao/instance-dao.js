@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var _ = require('lodash');
 var instance_model_1 = require('../model/instance-model');
-instance_model_1["default"].static('getAll', function (params) {
+instance_model_1.default.static('getAll', function (params) {
     return new Promise(function (resolve, reject) {
         var _query = params;
         Instance
@@ -15,7 +15,7 @@ instance_model_1["default"].static('getAll', function (params) {
         });
     });
 });
-instance_model_1["default"].static('getOne', function (params) {
+instance_model_1.default.static('getOne', function (params) {
     return new Promise(function (resolve, reject) {
         var _query = params;
         Instance
@@ -27,7 +27,7 @@ instance_model_1["default"].static('getOne', function (params) {
         });
     });
 });
-instance_model_1["default"].static('createInstance', function (instance) {
+instance_model_1.default.static('createInstance', function (instance) {
     return new Promise(function (resolve, reject) {
         if (!_.isObject(instance)) {
             return reject(new TypeError('Instance is not a valid object.'));
@@ -39,7 +39,7 @@ instance_model_1["default"].static('createInstance', function (instance) {
         });
     });
 });
-instance_model_1["default"].static('saveInstance', function (id, instance) {
+instance_model_1.default.static('saveInstance', function (id, instance) {
     return new Promise(function (resolve, reject) {
         var _query = { _id: id };
         Instance
@@ -51,6 +51,6 @@ instance_model_1["default"].static('saveInstance', function (id, instance) {
         });
     });
 });
-var Instance = mongoose.model('Instance', instance_model_1["default"]);
-exports.__esModule = true;
-exports["default"] = Instance;
+var Instance = mongoose.model('Instance', instance_model_1.default);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = Instance;

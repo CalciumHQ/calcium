@@ -3,9 +3,9 @@ import {
   Component, 
   Inject,
   OnInit
-} from 'angular2/core';
+} from '@angular/core';
 
-import {RouterLink} from 'angular2/router';
+import {RouterLink} from '@angular/router-deprecated';
 import {AuthService} from '../../auth/services/auth-service';
 
 @Component({
@@ -24,10 +24,7 @@ export class HeaderCmp implements OnInit {
   ngOnInit() {
     
     this._authService.currentUser
-        .subscribe((u) => {
-          console.log(u);
-          this.user = u;
-        }); 
+        .subscribe((u) => this.user = u ); 
   }
   
   logout() {

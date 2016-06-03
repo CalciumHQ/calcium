@@ -3,14 +3,17 @@ import {
   DynamicComponentLoader,
   AttributeMetadata,
   Directive, 
-  Attribute
-} from 'angular2/core';
+  Attribute,
+  Inject
+} from '@angular/core';
 
 import {
   Router,
   RouterOutlet,
   ComponentInstruction
-} from 'angular2/router';
+} from '@angular/router-deprecated';
+
+import { JwtHelper } from 'angular2-jwt';
 
 @Directive({
   selector: 'router-outlet'
@@ -42,7 +45,19 @@ export class LoggedInRouterOutlet extends RouterOutlet {
   }
   
   _canActivate(url) {
+
+    var user: Object;    
+    let storedToken = localStorage.getItem('calcium_jwt');
+
+    if (storedToken) {
+      try {
+        let jwtHelper = new JwtHelper();
+        user = jwtHelper.decodeToken(storedToken).user;  
+      }
+      catch (e) {}
+    }
+    
     return this.publicRoutes.indexOf(url) !== -1
-      || false;
+      || user;
   }
 }

@@ -1,20 +1,20 @@
 import {
   Component,
   Inject
-} from 'angular2/core';
+} from '@angular/core';
 
 import {
   FormBuilder,
   Validators,
   ControlGroup,
   Control
-} from 'angular2/common';
+} from '@angular/common';
 
 import {
   Router
-} from 'angular2/router';
+} from '@angular/router-deprecated';
 
-import {RouterLink} from 'angular2/router';
+import {RouterLink} from '@angular/router-deprecated';
 import {ActionBar} from '../../action-bar/components/action-bar';
 
 import {InstanceService} from '../../calculation/services/instance-service';
