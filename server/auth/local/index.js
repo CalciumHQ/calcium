@@ -13,14 +13,14 @@ var LocalStrategy = (function () {
             passwordField: 'password',
             passReqToCallback: true
         }, function (req, email, password, done) {
-            user_dao_1.default['findOne']({ email: email })
+            user_dao_1["default"]['findOne']({ email: email })
                 .then(function (user) {
                 if (user) {
                     return done(null, false);
                 }
-                user_dao_1.default['createUser']({
+                user_dao_1["default"]['createUser']({
                     email: email,
-                    password: user_dao_1.default['generateHash'](password)
+                    password: user_dao_1["default"]['generateHash'](password)
                 })
                     .then(function (user) {
                     var token = jwt.encode({ user: user }, _this.SECRET);
@@ -35,7 +35,7 @@ var LocalStrategy = (function () {
             passwordField: 'password'
         }, function (email, password, done) {
             console.log(email, password);
-            user_dao_1.default['findOne']({ email: email })
+            user_dao_1["default"]['findOne']({ email: email })
                 .then(function (user) {
                 if (!user) {
                     return done(null, false);

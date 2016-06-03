@@ -22,9 +22,9 @@ export class CalculationService {
   
   static ENDPOINT: string = '/api/calculations/:id';
 
-  constructor(@Inject(AuthHttp) private _http: AuthHttp) {
-
-  }
+  constructor(
+    @Inject(AuthHttp) private _http: AuthHttp
+  ) {}
 
   calculate(inputs:Object, calculation:string):Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });

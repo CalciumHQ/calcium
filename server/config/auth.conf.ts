@@ -9,7 +9,7 @@ export class AuthConfig {
   static init(application: express.Application):void {
     
     LocalStrategy.register(); 
-    // JwtStrategy.register();
+    JwtStrategy.register();
     
     application.use(passport.initialize());
   }

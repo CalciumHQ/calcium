@@ -6,37 +6,13 @@ var JwtStrategy = (function () {
     function JwtStrategy() {
     }
     JwtStrategy.register = function () {
-        passport.use('jwt-signup', new passport_jwt_1.Strategy({
-            usernameField: 'email',
-            passwordField: 'password',
-            passReqToCallback: true
-        }, function (req, email, password, done) {
-            user_dao_1.default['findOne']({ email: email })
-                .then(function (user) {
-                if (user) {
-                    done(null, false);
-                }
-                user_dao_1.default['createUser']({
-                    email: email,
-                    password: user_dao_1.default['generateHash'](password)
-                })
-                    .then(function (user) {
-                    done(null, user);
-                })
-                    .catch(function (error) { return done(error); });
-            })
-                .catch(function (error) { return done(error); });
-        }));
-        passport.use('jwt-login', new passport_jwt_1.Strategy({
-            usernameField: 'email',
-            passwordField: 'password'
-        }, function (email, password, done) {
-            user_dao_1.default['findOne']({ email: email })
+        passport.use(new passport_jwt_1.Strategy({
+            secretOrKey: this.SECRET,
+            jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeader()
+        }, function (payload, done) {
+            user_dao_1["default"]['findOne']({ _id: payload.user._id })
                 .then(function (user) {
                 if (!user) {
-                    done(null, false);
-                }
-                if (!user.validPassword(password)) {
                     done(null, false);
                 }
                 done(null, user);
@@ -44,6 +20,7 @@ var JwtStrategy = (function () {
                 .catch(function (error) { return done(error); });
         }));
     };
+    JwtStrategy.SECRET = 'jk34ty89jlarhgi24g89h432q9324gl9';
     return JwtStrategy;
 }());
 exports.JwtStrategy = JwtStrategy;

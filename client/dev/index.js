@@ -9,12 +9,12 @@ var application_cmp_1 = require('./application/components/application-cmp');
 var authHttpProvider = core_1.provide(angular2_jwt_1.AuthHttp, {
     useFactory: function (http) {
         return new angular2_jwt_1.AuthHttp(new angular2_jwt_1.AuthConfig({
-            // headerName: YOUR_HEADER_NAME,
-            // headerPrefix: YOUR_HEADER_PREFIX,
+            headerName: 'Authorization',
+            headerPrefix: 'JWT',
             tokenName: 'calcium_jwt',
             globalHeaders: [{ 'Content-Type': 'application/json' }],
             noJwtError: true,
-            noTokenScheme: true
+            noTokenScheme: false
         }), http);
     },
     deps: [http_1.Http]

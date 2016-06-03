@@ -1,55 +1,23 @@
 
 import * as passport from 'passport';
-import {Strategy} from 'passport-jwt';
+import {Strategy, ExtractJwt} from 'passport-jwt';
 import UserDAO from '../../api/user/dao/user-dao';
 
 export class JwtStrategy {
+  
+  private static SECRET = 'jk34ty89jlarhgi24g89h432q9324gl9';
 
   static register() {
-    
-    passport.use('jwt-signup', new Strategy({
-        usernameField: 'email',
-        passwordField: 'password',
-        passReqToCallback: true
-      }, function(req, email, password, done) {
-        
-        UserDAO
-          ['findOne']({ email: email })
-          .then(user => {
-            
-            if (user) {
-              done(null, false);
-            }
-            
-            UserDAO
-              ['createUser']({
-                email: email,
-                password: UserDAO['generateHash'](password)
-              })
-              .then(user => {
-                done(null, user);
-              })
-              .catch(error => done(error));
-          })
-          .catch(error => done(error));
-      }
-    ));
   
-    passport.use('jwt-login', new Strategy({
-        usernameField: 'email',
-        passwordField: 'password'
+    passport.use(new Strategy({
+        secretOrKey: this.SECRET,
+        jwtFromRequest: ExtractJwt.fromAuthHeader()
       }, 
-      function(email, password, done) {
-        
+      function(payload, done) {
         UserDAO
-          ['findOne']({ email: email })
-          .then(user => {
-            
+          ['findOne']({ _id: payload.user._id })
+          .then(user => { 
             if (!user) {
-              done(null, false);
-            }
-            
-            if (!user.validPassword(password)) {
               done(null, false);
             }
             

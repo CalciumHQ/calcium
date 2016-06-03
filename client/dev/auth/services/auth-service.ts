@@ -34,7 +34,7 @@ export class AuthService {
   public currentUser: Observable<Object>;
 
   constructor(
-    private _http: AuthHttp
+    @Inject(AuthHttp) private _http: AuthHttp
   ) {
 
     this._jwtHelper = new JwtHelper();

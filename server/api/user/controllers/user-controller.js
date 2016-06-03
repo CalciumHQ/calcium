@@ -12,7 +12,7 @@ var UserController = (function () {
     UserController.saveUser = function (req, res) {
         var _id = req.params.id;
         var _user = req.body;
-        user_dao_1.default['saveUser'](_id, _user)
+        user_dao_1["default"]['saveUser'](_id, _user)
             .then(function (instance) { return res.status(200).json(instance); })
             .catch(function (error) { return res.status(400).json(error); });
     };

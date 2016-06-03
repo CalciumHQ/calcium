@@ -22,9 +22,9 @@ export class TemplateService {
 
   static ENDPOINT: string = '/api/templates/:id';
 
-  constructor(@Inject(AuthHttp) private _http: AuthHttp) {
-
-  }
+  constructor(
+    @Inject(AuthHttp) private _http: AuthHttp
+  ) {}
 
   getAll():Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });

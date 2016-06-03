@@ -10,12 +10,12 @@ import {ApplicationCmp} from './application/components/application-cmp';
 let authHttpProvider = provide(AuthHttp, {
   useFactory: (http) => {
     return new AuthHttp(new AuthConfig({
-      // headerName: YOUR_HEADER_NAME,
-      // headerPrefix: YOUR_HEADER_PREFIX,
+      headerName: 'Authorization',
+      headerPrefix: 'JWT',
       tokenName: 'calcium_jwt',
       globalHeaders: [{'Content-Type':'application/json'}],
       noJwtError: true,
-      noTokenScheme: true
+      noTokenScheme: false
     }), http);
   },
   deps: [Http]
