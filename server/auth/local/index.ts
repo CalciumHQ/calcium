@@ -44,7 +44,7 @@ export class LocalStrategy {
         passwordField: 'password' 
       }, 
       (email, password, done) => {
-        
+        console.log(email, password); 
         UserDAO
           ['findOne']({ email: email })
           .then(user => {
@@ -60,7 +60,9 @@ export class LocalStrategy {
             let token = jwt.encode({ user: user }, this.SECRET);
             return done(null, token);
           })
-          .catch(error => done(error)); 
+          .catch(function(error) {
+            done(error);
+          }); 
       }
     )); 
   }

@@ -13,14 +13,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var angular2_jwt_1 = require('angular2-jwt');
 require('rxjs/add/operator/map');
 var TemplateService = (function () {
     function TemplateService(_http) {
         this._http = _http;
     }
     TemplateService.prototype.getAll = function () {
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http
             .get(TemplateService.ENDPOINT.replace(':id', ''), { headers: headers })
             .map(function (r) { return r.json(); });
@@ -28,8 +28,8 @@ var TemplateService = (function () {
     TemplateService.ENDPOINT = '/api/templates/:id';
     TemplateService = __decorate([
         core_1.Injectable(),
-        __param(0, core_1.Inject(http_1.Http)), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __param(0, core_1.Inject(angular2_jwt_1.AuthHttp)), 
+        __metadata('design:paramtypes', [angular2_jwt_1.AuthHttp])
     ], TemplateService);
     return TemplateService;
 }());

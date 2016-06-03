@@ -34,6 +34,7 @@ var LocalStrategy = (function () {
             usernameField: 'email',
             passwordField: 'password'
         }, function (email, password, done) {
+            console.log(email, password);
             user_dao_1.default['findOne']({ email: email })
                 .then(function (user) {
                 if (!user) {
@@ -45,7 +46,9 @@ var LocalStrategy = (function () {
                 var token = jwt.encode({ user: user }, _this.SECRET);
                 return done(null, token);
             })
-                .catch(function (error) { return done(error); });
+                .catch(function (error) {
+                done(error);
+            });
         }));
     };
     LocalStrategy.SECRET = 'jk34ty89jlarhgi24g89h432q9324gl9';

@@ -12,13 +12,11 @@ import {
 } from 'rxjs/BehaviorSubject';
 
 import {
-  Http,
   Headers
 } from '@angular/http';
 
 import {
-  AuthHttp, 
-  AuthConfig, 
+  AuthHttp,
   JwtHelper
 } from 'angular2-jwt';
 
@@ -36,7 +34,7 @@ export class AuthService {
   public currentUser: Observable<Object>;
 
   constructor(
-    @Inject(Http) private _http: Http
+    private _http: AuthHttp
   ) {
 
     this._jwtHelper = new JwtHelper();
@@ -74,14 +72,12 @@ export class AuthService {
       email: email,
       password: password
     });
-
-    let headers = new Headers();
+    
+    let headers = new Headers({ 'Content-Type': 'application/json' });
     let jwtHelper = new JwtHelper();
 
-    headers.append('Content-Type', 'application/json');
-
     return this._http
-               .post(AuthService.LOGIN_ENDPOINT, _dataStringified, {headers})
+               .post(AuthService.LOGIN_ENDPOINT, _dataStringified, { headers: headers})
                .map((r) => r.json())
                .do((r) => this.saveJwt(r))
                .map((r) => this._jwtHelper.decodeToken(r).user)
@@ -89,25 +85,20 @@ export class AuthService {
   }
   
   public logout():Observable<any> {
-    
-    let headers = new Headers();
-    
-    headers.append('Content-Type', 'application/json');
+    let headers = new Headers({ 'Content-Type': 'application/json' });
     
     return this._http
-               .get(AuthService.LOGOUT_ENDPOINT, {headers})
+               .get(AuthService.LOGOUT_ENDPOINT, { headers: headers})
                .map((r) => r.json())
                .do((r) => this.clearJwt())
                .do((r) => this.currentUserSource.next(null));
   }
   
   public checkCurrentUser() {
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
+  let headers = new Headers({ 'Content-Type': 'application/json' });
 
     this._http
-        .get(AuthService.USER_ENDPOINT, {headers})
+        .get(AuthService.USER_ENDPOINT, { headers: headers})
         .map((r) => r.json())
         .catch((e, o) => Observable.empty())
         .subscribe((r) => this.currentUserSource.next(r));

@@ -8,9 +8,12 @@ import {
 } from 'rxjs/Observable';
 
 import {
-  Http,
   Headers
 } from '@angular/http';
+
+import {
+  AuthHttp
+} from 'angular2-jwt';
 
 import 'rxjs/add/operator/map';
 
@@ -19,59 +22,47 @@ export class InstanceService {
   
   static ENDPOINT: string = '/api/instances/:id';
 
-  constructor(@Inject(Http) private _http: Http) {
-
+  constructor(private _http: AuthHttp) {
   }
 
   getAll():Observable<any> {
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    
     return this._http
-               .get(InstanceService.ENDPOINT.replace(':id', ''), {headers})
+               .get(InstanceService.ENDPOINT.replace(':id', ''), { headers: headers })
                .map((r) => r.json());
   }
   
   getOne(id:string):Observable<any> {
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    
     return this._http
-               .get(InstanceService.ENDPOINT.replace(':id', id), {headers})
+               .get(InstanceService.ENDPOINT.replace(':id', id), { headers: headers })
                .map((r) => r.json());
   }
   
   add(instance:Object):Observable<any> {
-    let headers = new Headers();
+    let headers = new Headers({ 'Content-Type': 'application/json' });
     let stringified = JSON.stringify(instance);
 
-    headers.append('Content-Type', 'application/json');
-
     return this._http
-               .post(InstanceService.ENDPOINT.replace(':id', ''), stringified, {headers})
+               .post(InstanceService.ENDPOINT.replace(':id', ''), stringified, { headers: headers })
                .map((r) => r.json());
   }
   
   saveInstance(id:string, instance:Object):Observable<any> {
-    let headers = new Headers();
+    let headers = new Headers({ 'Content-Type': 'application/json' });
     let stringified = JSON.stringify(instance);
 
-    headers.append('Content-Type', 'application/json');
-
     return this._http
-               .patch(InstanceService.ENDPOINT.replace(':id', id), stringified, {headers})
+               .patch(InstanceService.ENDPOINT.replace(':id', id), stringified, { headers: headers })
                .map((r) => r.json());
   }
   
   getTemplate(url:string):Observable<any> {
-     let headers = new Headers();
-     
-     headers.append('Content-Type', 'application/json');
      
      return this._http
-                .get(url, {headers})
+                .get(url)
                 .map((r) => r.text());
   }
 }

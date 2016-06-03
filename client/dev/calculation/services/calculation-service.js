@@ -13,18 +13,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var angular2_jwt_1 = require('angular2-jwt');
 require('rxjs/add/operator/map');
 var CalculationService = (function () {
     function CalculationService(_http) {
         this._http = _http;
     }
     CalculationService.prototype.calculate = function (inputs, calculation) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var _stringified = JSON.stringify({
             calculation: calculation,
             inputs: inputs
         });
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
         return this._http
             .post(CalculationService.ENDPOINT.replace(':id', ''), _stringified, { headers: headers })
             .map(function (r) { return r.json(); });
@@ -32,8 +32,8 @@ var CalculationService = (function () {
     CalculationService.ENDPOINT = '/api/calculations/:id';
     CalculationService = __decorate([
         core_1.Injectable(),
-        __param(0, core_1.Inject(http_1.Http)), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __param(0, core_1.Inject(angular2_jwt_1.AuthHttp)), 
+        __metadata('design:paramtypes', [angular2_jwt_1.AuthHttp])
     ], CalculationService);
     return CalculationService;
 }());

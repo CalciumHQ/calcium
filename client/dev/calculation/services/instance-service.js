@@ -8,58 +8,49 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var angular2_jwt_1 = require('angular2-jwt');
 require('rxjs/add/operator/map');
 var InstanceService = (function () {
     function InstanceService(_http) {
         this._http = _http;
     }
     InstanceService.prototype.getAll = function () {
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http
             .get(InstanceService.ENDPOINT.replace(':id', ''), { headers: headers })
             .map(function (r) { return r.json(); });
     };
     InstanceService.prototype.getOne = function (id) {
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http
             .get(InstanceService.ENDPOINT.replace(':id', id), { headers: headers })
             .map(function (r) { return r.json(); });
     };
     InstanceService.prototype.add = function (instance) {
-        var headers = new http_1.Headers();
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var stringified = JSON.stringify(instance);
-        headers.append('Content-Type', 'application/json');
         return this._http
             .post(InstanceService.ENDPOINT.replace(':id', ''), stringified, { headers: headers })
             .map(function (r) { return r.json(); });
     };
     InstanceService.prototype.saveInstance = function (id, instance) {
-        var headers = new http_1.Headers();
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var stringified = JSON.stringify(instance);
-        headers.append('Content-Type', 'application/json');
         return this._http
             .patch(InstanceService.ENDPOINT.replace(':id', id), stringified, { headers: headers })
             .map(function (r) { return r.json(); });
     };
     InstanceService.prototype.getTemplate = function (url) {
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
         return this._http
-            .get(url, { headers: headers })
+            .get(url)
             .map(function (r) { return r.text(); });
     };
     InstanceService.ENDPOINT = '/api/instances/:id';
     InstanceService = __decorate([
-        core_1.Injectable(),
-        __param(0, core_1.Inject(http_1.Http)), 
-        __metadata('design:paramtypes', [http_1.Http])
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [angular2_jwt_1.AuthHttp])
     ], InstanceService);
     return InstanceService;
 }());

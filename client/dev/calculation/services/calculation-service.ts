@@ -8,9 +8,12 @@ import {
 } from 'rxjs/Observable';
 
 import {
-  Http,
   Headers
 } from '@angular/http';
+
+import {
+  AuthHttp
+} from 'angular2-jwt';
 
 import 'rxjs/add/operator/map';
 
@@ -19,22 +22,20 @@ export class CalculationService {
   
   static ENDPOINT: string = '/api/calculations/:id';
 
-  constructor(@Inject(Http) private _http: Http) {
+  constructor(@Inject(AuthHttp) private _http: AuthHttp) {
 
   }
 
   calculate(inputs:Object, calculation:string):Observable<any> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    
     let _stringified = JSON.stringify({
       calculation: calculation,
       inputs: inputs
     });
 
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-
     return this._http
-               .post(CalculationService.ENDPOINT.replace(':id', ''), _stringified, {headers})
+               .post(CalculationService.ENDPOINT.replace(':id', ''), _stringified, { headers: headers })
                .map((r) => r.json());
   }
 }

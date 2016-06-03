@@ -1,10 +1,28 @@
 /// <reference path="../../node_modules/angular2/typings/browser.d.ts" />
-
+import {provide} from '@angular/core';
 import {bootstrap} from '@angular/platform-browser-dynamic';
-import {HTTP_PROVIDERS} from '@angular/http';
-import {AuthHttp, AuthConfig, AUTH_PROVIDERS} from 'angular2-jwt';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
+import {AuthHttp, AuthConfig} from 'angular2-jwt';
 import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 
 import {ApplicationCmp} from './application/components/application-cmp';
 
-bootstrap(ApplicationCmp, [HTTP_PROVIDERS, ROUTER_PROVIDERS, AUTH_PROVIDERS]);
+let authHttpProvider = provide(AuthHttp, {
+  useFactory: (http) => {
+    return new AuthHttp(new AuthConfig({
+      // headerName: YOUR_HEADER_NAME,
+      // headerPrefix: YOUR_HEADER_PREFIX,
+      tokenName: 'calcium_jwt',
+      globalHeaders: [{'Content-Type':'application/json'}],
+      noJwtError: true,
+      noTokenScheme: true
+    }), http);
+  },
+  deps: [Http]
+});
+
+bootstrap(ApplicationCmp, [
+  HTTP_PROVIDERS, 
+  ROUTER_PROVIDERS, 
+  authHttpProvider
+]);
