@@ -10,7 +10,7 @@ var JwtStrategy = (function () {
             secretOrKey: this.SECRET,
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeader()
         }, function (payload, done) {
-            user_dao_1["default"]['findOne']({ _id: payload.user._id })
+            user_dao_1.default['findOne']({ _id: payload._id })
                 .then(function (user) {
                 if (!user) {
                     done(null, false);

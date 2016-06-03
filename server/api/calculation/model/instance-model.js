@@ -5,6 +5,11 @@ var schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     template: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Template',
@@ -23,5 +28,5 @@ var schema = new mongoose.Schema({
         default: Date.now
     }
 }, { minimize: false });
-exports.__esModule = true;
-exports["default"] = schema;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = schema;

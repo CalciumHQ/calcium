@@ -30,7 +30,7 @@ export class LocalStrategy {
                 password: UserDAO['generateHash'](password)
               })
               .then(user => {
-                let token = jwt.encode({ user: user }, this.SECRET);
+                let token = jwt.encode(user, this.SECRET);
                 return done(null, token);
               })
               .catch(error => done(error));
@@ -57,7 +57,7 @@ export class LocalStrategy {
               return done(null, false);
             }
             
-            let token = jwt.encode({ user: user }, this.SECRET);
+            let token = jwt.encode(user, this.SECRET);
             return done(null, token);
           })
           .catch(function(error) {

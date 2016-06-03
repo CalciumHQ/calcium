@@ -15,7 +15,7 @@ export class JwtStrategy {
       }, 
       function(payload, done) {
         UserDAO
-          ['findOne']({ _id: payload.user._id })
+          ['findOne']({ _id: payload._id }) 
           .then(user => { 
             if (!user) {
               done(null, false);

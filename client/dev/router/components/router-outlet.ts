@@ -52,7 +52,7 @@ export class LoggedInRouterOutlet extends RouterOutlet {
     if (storedToken) {
       try {
         let jwtHelper = new JwtHelper();
-        user = jwtHelper.decodeToken(storedToken).user;  
+        user = jwtHelper.decodeToken(storedToken);  
       }
       catch (e) {}
     }

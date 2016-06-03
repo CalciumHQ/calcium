@@ -5,9 +5,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
+var router_deprecated_1 = require('@angular/router-deprecated');
 var calculation_service_1 = require("../../calculation/services/calculation-service");
+var instance_service_1 = require("../../calculation/services/instance-service");
 var latex_component_1 = require('../../calculation/components/latex-component');
 var dynamic_calculation_cmp_1 = require('./dynamic-calculation-cmp');
 var DynamicCalculationContainer = (function () {
@@ -27,17 +32,19 @@ var DynamicCalculationContainer = (function () {
             .subscribe(function (template) {
             _this.templateHtml = template;
             var resolvedProviders = core_1.ReflectiveInjector.resolve([common_1.FORM_PROVIDERS, calculation_service_1.CalculationService]);
-            _this.loader.loadNextToLocation(dynamic_calculation_cmp_1["default"](_this.templateHtml, _this.instance, [common_1.FORM_DIRECTIVES, latex_component_1.LatexComponent]), _this.viewContainerRef, resolvedProviders);
+            _this.loader.loadNextToLocation(dynamic_calculation_cmp_1.default(_this.templateHtml, _this.instance, [common_1.FORM_DIRECTIVES, latex_component_1.LatexComponent]), _this.viewContainerRef, resolvedProviders);
         });
     };
     __decorate([
-        core_1.Input()
-    ], DynamicCalculationContainer.prototype, "instance");
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], DynamicCalculationContainer.prototype, "instance", void 0);
     DynamicCalculationContainer = __decorate([
         core_1.Component({
             selector: 'dynamic-calculation-container',
             template: '<div #container></div>'
-        })
+        }), 
+        __metadata('design:paramtypes', [core_1.DynamicComponentLoader, core_1.ViewContainerRef, router_deprecated_1.RouteParams, instance_service_1.InstanceService])
     ], DynamicCalculationContainer);
     return DynamicCalculationContainer;
 }());

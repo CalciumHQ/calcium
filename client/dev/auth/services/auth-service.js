@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
@@ -23,7 +26,7 @@ var AuthService = (function () {
         var storedToken = this.getJwt();
         if (storedToken) {
             try {
-                user = this._jwtHelper.decodeToken(storedToken).user;
+                user = this._jwtHelper.decodeToken(storedToken);
             }
             catch (e) { }
         }
@@ -52,7 +55,7 @@ var AuthService = (function () {
             .post(AuthService.LOGIN_ENDPOINT, _dataStringified, { headers: headers })
             .map(function (r) { return r.json(); })
             .do(function (r) { return _this.saveJwt(r); })
-            .map(function (r) { return _this._jwtHelper.decodeToken(r).user; })
+            .map(function (r) { return _this._jwtHelper.decodeToken(r); })
             .do(function (r) { return _this.currentUserSource.next(r); });
     };
     AuthService.prototype.logout = function () {
@@ -78,7 +81,8 @@ var AuthService = (function () {
     AuthService.USER_ENDPOINT = '/api/users/me';
     AuthService = __decorate([
         core_1.Injectable(),
-        __param(0, core_1.Inject(angular2_jwt_1.AuthHttp))
+        __param(0, core_1.Inject(angular2_jwt_1.AuthHttp)), 
+        __metadata('design:paramtypes', [angular2_jwt_1.AuthHttp])
     ], AuthService);
     return AuthService;
 }());

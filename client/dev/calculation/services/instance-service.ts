@@ -15,7 +15,7 @@ import {
   AuthHttp
 } from 'angular2-jwt';
 
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/map'; 
 
 @Injectable()
 export class InstanceService {

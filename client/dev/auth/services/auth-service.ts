@@ -44,7 +44,7 @@ export class AuthService {
     
     if (storedToken) {
       try {
-        user = this._jwtHelper.decodeToken(storedToken).user;  
+        user = this._jwtHelper.decodeToken(storedToken);  
       }
       catch (e) {}
     }
@@ -80,7 +80,7 @@ export class AuthService {
                .post(AuthService.LOGIN_ENDPOINT, _dataStringified, { headers: headers})
                .map((r) => r.json())
                .do((r) => this.saveJwt(r))
-               .map((r) => this._jwtHelper.decodeToken(r).user)
+               .map((r) => this._jwtHelper.decodeToken(r))
                .do((r) => this.currentUserSource.next(r));
   }
   

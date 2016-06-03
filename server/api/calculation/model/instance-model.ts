@@ -5,6 +5,11 @@ var schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   template: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Template',
