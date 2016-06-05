@@ -4,7 +4,7 @@ import InstanceDAO from '../dao/instance-dao';
 
 export class InstanceController {
   static getAll(req: express.Request, res: express.Response):void {
-      InstanceDAO 
+      InstanceDAO
         ['getAll']({ owner: req.user._id })
         .then(instances => res.status(200).json(instances))
         .catch(error => res.status(400).json(error));

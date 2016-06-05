@@ -2,6 +2,7 @@
 import {Component} from '@angular/core';
 
 import {HeaderCmp} from '../../header/components/header-cmp';
+import {HomeView} from '../../home/components/home-view';
 import {DashboardView} from '../../dashboard/components/dashboard-view';
 import {NewInstanceView} from '../../instance/components/new-instance-view';
 import {InstanceView} from '../../instance/components/instance-view';
@@ -20,6 +21,7 @@ import 'rxjs/Rx'
   templateUrl: 'client/dev/application/templates/application-cmp.html',
 })
 @RouteConfig([
+  { name: 'Home', path: '/', component: HomeView },
   { name: 'Login', path: '/login', component: LoginForm },
   { name: 'Dashboard', path: '/dashboard', component: DashboardView },
   { name: 'NewInstance', path: '/calculation/new', component: NewInstanceView },

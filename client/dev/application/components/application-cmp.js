@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var header_cmp_1 = require('../../header/components/header-cmp');
+var home_view_1 = require('../../home/components/home-view');
 var dashboard_view_1 = require('../../dashboard/components/dashboard-view');
 var new_instance_view_1 = require('../../instance/components/new-instance-view');
 var instance_view_1 = require('../../instance/components/instance-view');
@@ -29,6 +30,7 @@ var ApplicationCmp = (function () {
             templateUrl: 'client/dev/application/templates/application-cmp.html',
         }),
         router_deprecated_1.RouteConfig([
+            { name: 'Home', path: '/', component: home_view_1.HomeView },
             { name: 'Login', path: '/login', component: login_form_1.LoginForm },
             { name: 'Dashboard', path: '/dashboard', component: dashboard_view_1.DashboardView },
             { name: 'NewInstance', path: '/calculation/new', component: new_instance_view_1.NewInstanceView },

@@ -5,6 +5,10 @@ import {
   OnInit
 } from '@angular/core';
 
+import {
+  Router
+} from '@angular/router-deprecated';
+
 import {RouterLink} from '@angular/router-deprecated';
 import {AuthService} from '../../auth/services/auth-service';
 
@@ -17,9 +21,9 @@ export class HeaderCmp implements OnInit {
   
   public user:Object;
   
-  constructor(@Inject(AuthService) private _authService: AuthService) {
-
-  }
+  constructor(@Inject(AuthService) private _authService: AuthService,
+    @Inject(Router) private _router: Router
+  ) {}
   
   ngOnInit() {
     
@@ -31,6 +35,8 @@ export class HeaderCmp implements OnInit {
     
     this._authService
         .logout()
-        .subscribe();
+        .subscribe(() => {
+          this._router.navigate(['Home']);
+        });
   }
 }
