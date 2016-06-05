@@ -7,7 +7,7 @@ instance_model_1.default.static('getAll', function (params) {
     return new Promise(function (resolve, reject) {
         var _query = params;
         Instance
-            .find()
+            .find(_query)
             .populate('template')
             .exec(function (err, instance) {
             err ? reject(err)

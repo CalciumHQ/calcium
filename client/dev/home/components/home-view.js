@@ -8,20 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
-var action_bar_1 = require('../../action-bar/components/action-bar');
+var auth_service_1 = require('../../auth/services/auth-service');
 var HomeView = (function () {
-    function HomeView() {
+    function HomeView(_authService) {
+        this._authService = _authService;
     }
+    HomeView.prototype.ngOnInit = function () {
+        var _this = this;
+        this._authService.currentUser
+            .subscribe(function (u) { return _this.user = u; });
+    };
     HomeView = __decorate([
         core_1.Component({
             selector: 'home-view',
-            directives: [router_deprecated_1.RouterLink, action_bar_1.ActionBar],
+            directives: [router_deprecated_1.RouterLink],
             templateUrl: 'client/dev/home/templates/home-view.html',
             styleUrls: ['client/dev/home/styles/home-view.css']
-        }), 
-        __metadata('design:paramtypes', [])
+        }),
+        __param(0, core_1.Inject(auth_service_1.AuthService)), 
+        __metadata('design:paramtypes', [auth_service_1.AuthService])
     ], HomeView);
     return HomeView;
 }());

@@ -8,7 +8,7 @@ instanceSchema.static('getAll', (params:Object):Promise<any> => {
         let _query = params;
 
         Instance
-          .find()
+          .find(_query)
           .populate('template')
           .exec((err, instance) => {
               err ? reject(err)
