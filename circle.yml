@@ -27,7 +27,7 @@ dependencies:
 
 deployment:
   staging:
-    owner: Calcium
+    owner: CalciumHQ
     branch: master
     commands:
       - sed "s/<EMAIL>/$DOCKER_EMAIL/;s/<AUTH>/$DOCKER_AUTH/" < .dockercfg.template > ~/.dockercfg

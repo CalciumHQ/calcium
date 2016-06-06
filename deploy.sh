@@ -5,7 +5,7 @@ SHA1=$1
 EB_ENVIRONMENT=$2
 
 # Deploy image to Docker Hub
-docker push calcium/web:$SHA1
+docker push simonrobb/calcium-web:$SHA1
 
 # Create a new Elastic Beanstalk version
 EB_BUCKET=calcium-deployment

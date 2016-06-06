@@ -5,7 +5,7 @@
     "Key": "dockercfg"
   },
   "Image": {
-    "Name": "calciumhq/web:<TAG>",
+    "Name": "simonrobb/calcium-web:<TAG>",
     "Update": "true"
   },
   "Ports": [
