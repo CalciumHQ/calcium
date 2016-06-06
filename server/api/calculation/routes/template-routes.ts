@@ -1,7 +1,7 @@
 "use strict";
 
 import * as express from 'express';
-import {TemplateController} from '../controller/Template-controller';
+import {TemplateController} from '../controller/template-controller';
 
 export class TemplateRoutes {
     static init(router: express.Router) {

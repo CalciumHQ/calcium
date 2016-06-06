@@ -3,7 +3,7 @@
 if ('production' === process.env.NODE_ENV)
     require('newrelic');
 
-var PORT = process.env.PORT || 3333;
+var PORT = process.env.PORT || 8081;
 
 import * as express from 'express';
 import * as os from 'os';

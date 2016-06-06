@@ -1,6 +1,6 @@
 import {
   Component,
-  Input
+  Input,
   DynamicComponentLoader,
   ViewContainerRef,
   ReflectiveInjector,
