@@ -23,7 +23,7 @@ dependencies:
     - npm run build-dist
 
   override:
-    - docker build -t calcium/web:$CIRCLE_SHA1 .
+    - docker build -t simonrobb/calcium-web:$CIRCLE_SHA1 .
 
 deployment:
   staging:
