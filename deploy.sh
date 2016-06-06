@@ -18,6 +18,7 @@ sed "s/<TAG>/$SHA1/" < Dockerrun.aws.json.template > Dockerrun.aws.json
 zip $CIRCLE_ARTIFACTS/$DOCKER_ZIP -r Dockerrun.aws.json .ebextensions/
 
 # Create new Elastic Beanstalk version
+aws s3 cp .dockercfg s3://$EB_BUCKET/dockercfg
 aws s3 cp $CIRCLE_ARTIFACTS/$DOCKER_ZIP s3://$EB_BUCKET/$DOCKER_ZIP
 aws elasticbeanstalk create-application-version --application-name $EB_APPLICATION \
   --version-label $SHA1 --source-bundle S3Bucket=$EB_BUCKET,S3Key=$DOCKER_ZIP
