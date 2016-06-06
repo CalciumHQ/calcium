@@ -1,5 +1,7 @@
 
 machine:
+  node:
+    
   ruby:
     version: 2.1.2
   services:
@@ -16,8 +18,8 @@ dependencies:
   pre:
     - sudo service docker stop; sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'; sudo chmod 0755 /usr/bin/docker; sudo service docker start; true
     - npm install --global gulp
-    - npm --version
     - npm install --only=dev
+    - node --version
     - npm run build-dist
 
   override:
