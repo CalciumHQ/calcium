@@ -1,0 +1,10 @@
+.action-bar {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+:host .navigation-link {
+  display: inline-block;
+  margin-top: 8px;
+}

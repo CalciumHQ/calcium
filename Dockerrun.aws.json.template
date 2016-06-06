@@ -1,0 +1,17 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "Bucket": "calcium-deployment",
+    "Key": "dockercfg"
+  },
+  "Image": {
+    "Name": "calciumhq/web:<TAG>",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8081"
+    }
+  ],
+  "Logging": "/var/log/docker"
+}
