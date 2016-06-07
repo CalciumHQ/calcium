@@ -15,4 +15,4 @@ EXPOSE 8081
 
 # Start the runtime
 WORKDIR "/src"
-CMD ["npm start"]
+CMD ["node", "server/server.js"]
