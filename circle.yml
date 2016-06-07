@@ -23,7 +23,7 @@ dependencies:
     - npm run build-dist
 
   override:
-    - docker build -t simonrobb/calcium-web:$CIRCLE_SHA1 .
+    - docker build -t $IMAGE_NAME:$CIRCLE_SHA1 .
 
 deployment:
   staging:
@@ -31,11 +31,11 @@ deployment:
     branch: master
     commands:
       - sed "s/<EMAIL>/$DOCKER_EMAIL/;s/<AUTH>/$DOCKER_AUTH/" < .dockercfg.template > .dockercfg
-      - bash -x deploy.sh $CIRCLE_SHA1 calcium-staging
+      - bash -x deploy.sh $IMAGE_NAME $CIRCLE_SHA1 calcium-staging
 
   production:
-    owner: Calcium
+    owner: CalciumHQ
     branch: production
     commands:
       - sed "s/<EMAIL>/$DOCKER_EMAIL/;s/<AUTH>/$DOCKER_AUTH/" < .dockercfg.template > .dockercfg
-      - bash -x deploy.sh $CIRCLE_SHA1 calcium-production
+      - bash -x deploy.sh $IMAGE_NAME $CIRCLE_SHA1 calcium-production
