@@ -26,14 +26,12 @@ dependencies:
     - docker build -t $IMAGE_NAME:$CIRCLE_SHA1 .
 
 deployment:
-  pre:
-    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-    
   staging:
     owner: CalciumHQ
     branch: master
     commands:
       - sed "s/<EMAIL>/$DOCKER_EMAIL/;s/<AUTH>/$DOCKER_AUTH/" < .dockercfg.template > .dockercfg
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - bash -x deploy.sh $IMAGE_NAME $CIRCLE_SHA1 calcium-staging
 
   production:
@@ -41,4 +39,5 @@ deployment:
     branch: production
     commands:
       - sed "s/<EMAIL>/$DOCKER_EMAIL/;s/<AUTH>/$DOCKER_AUTH/" < .dockercfg.template > .dockercfg
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - bash -x deploy.sh $IMAGE_NAME $CIRCLE_SHA1 calcium-production
