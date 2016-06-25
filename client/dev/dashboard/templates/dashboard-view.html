@@ -31,10 +31,7 @@
             <td><a [routerLink]="['Instance', { id: instance._id }]">{{ instance.name }}</a></td>
             <td>{{ instance.template.name }}</td>
             <td>
-              <button class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">Action <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="">Delete</a></li>
-              </ul>
+              <a class="btn btn-default pull-right" [routerLink]="['Instance', { id: instance._id }]">Open</a>
             </td>
           </tr>
         </tbody>

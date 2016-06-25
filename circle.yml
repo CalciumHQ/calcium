@@ -1,5 +1,8 @@
 
 machine:
+  pre:
+    - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'
+    - sudo chmod 0755 /usr/bin/docker
   node:
     version: 4.4.3
   ruby:
@@ -30,9 +33,7 @@ deployment:
     owner: CalciumHQ
     branch: master
     commands:
-      - sed "s/<EMAIL>/$DOCKER_EMAIL/;s/<AUTH>/$DOCKER_AUTH/" < .dockercfg.template > .dockercfg
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - bash -x deploy.sh $IMAGE_NAME $CIRCLE_SHA1 calcium-staging
+      - ./deploy.sh
 
   production:
     owner: CalciumHQ
