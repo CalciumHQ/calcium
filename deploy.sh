@@ -22,10 +22,6 @@ make_task_def() {
       {
         "volumesFrom": [],
         "memory": 300,
-        "extraHosts": null,
-        "dnsServers": null,
-        "disableNetworking": null,
-        "dnsSearchDomains": null,
         "portMappings": [
           {
             "hostPort": %s,
@@ -33,24 +29,15 @@ make_task_def() {
             "protocol": "tcp"
           }
         ],
-        "hostname": null,
         "essential": true,
         "entryPoint": [],
         "mountPoints": [],
         "name": "calcium-staging",
-        "ulimits": null,
-        "dockerSecurityOptions": null,
         "environment": [],
         "links": [],
-        "workingDirectory": null,
-        "readonlyRootFilesystem": null,
         "image": "674110226179.dkr.ecr.us-east-1.amazonaws.com/calcium/website:%s",
         "command": [],
-        "user": null,
-        "dockerLabels": null,
-        "logConfiguration": null,
-        "cpu": 10,
-        "privileged": null
+        "cpu": 10
       }
     ]'
 
