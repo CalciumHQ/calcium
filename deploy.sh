@@ -28,7 +28,7 @@ make_task_def() {
         "dnsSearchDomains": null,
         "portMappings": [
           {
-            "hostPort": $host_port,
+            "hostPort": %s,
             "containerPort": 8081,
             "protocol": "tcp"
           }
@@ -54,7 +54,7 @@ make_task_def() {
       }
     ]'
 
-    task_def=$(printf "$task_template" $CIRCLE_SHA1 $host_port)
+    task_def=$(printf "$task_template" $host_port $CIRCLE_SHA1)
 
 }
 
