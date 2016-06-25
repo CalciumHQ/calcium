@@ -20,7 +20,8 @@ var instance_service_1 = require('../../calculation/services/instance-service');
 var calculation_service_1 = require("../../calculation/services/calculation-service");
 var dynamic_calculation_container_1 = require('./dynamic-calculation-container');
 var InstanceView = (function () {
-    function InstanceView(fb, _params, _instanceService) {
+    function InstanceView(fb, _router, _params, _instanceService) {
+        this._router = _router;
         this._params = _params;
         this._instanceService = _instanceService;
         this.output = {
@@ -30,6 +31,16 @@ var InstanceView = (function () {
     }
     InstanceView.prototype.ngOnInit = function () {
         this._getInstance();
+    };
+    InstanceView.prototype.handleDeleteClick = function () {
+        var _this = this;
+        if (confirm('Delete this calculation?')) {
+            this._instanceService
+                .deleteInstance(this._params.get('id'))
+                .subscribe(function () {
+                _this._router.navigate(['Dashboard']);
+            });
+        }
     };
     InstanceView.prototype._getInstance = function () {
         var _this = this;
@@ -48,9 +59,10 @@ var InstanceView = (function () {
             directives: [router_deprecated_2.RouterLink, action_bar_1.ActionBar, dynamic_calculation_container_1.DynamicCalculationContainer]
         }),
         __param(0, core_1.Inject(common_1.FormBuilder)),
-        __param(1, core_1.Inject(router_deprecated_1.RouteParams)),
-        __param(2, core_1.Inject(instance_service_1.InstanceService)), 
-        __metadata('design:paramtypes', [common_1.FormBuilder, router_deprecated_1.RouteParams, instance_service_1.InstanceService])
+        __param(1, core_1.Inject(router_deprecated_1.Router)),
+        __param(2, core_1.Inject(router_deprecated_1.RouteParams)),
+        __param(3, core_1.Inject(instance_service_1.InstanceService)), 
+        __metadata('design:paramtypes', [common_1.FormBuilder, router_deprecated_1.Router, router_deprecated_1.RouteParams, instance_service_1.InstanceService])
     ], InstanceView);
     return InstanceView;
 }());

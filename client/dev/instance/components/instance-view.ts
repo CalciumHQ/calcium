@@ -19,6 +19,7 @@ import {
 } from '@angular/common';
 
 import {
+  Router,
   RouteParams
 } from '@angular/router-deprecated';
 
@@ -47,6 +48,7 @@ export class InstanceView implements OnInit {
   };
   
   constructor(@Inject(FormBuilder) fb:FormBuilder,
+              @Inject(Router) private _router: Router, 
               @Inject(RouteParams) private _params:RouteParams,
               @Inject(InstanceService) private _instanceService: InstanceService) {
   }
@@ -55,12 +57,22 @@ export class InstanceView implements OnInit {
     
     this._getInstance();
   }
+
+  handleDeleteClick() {
+    if (confirm('Delete this calculation?')) {
+      this._instanceService
+          .deleteInstance(this._params.get('id'))
+          .subscribe(() => {
+            this._router.navigate(['Dashboard']);
+          });
+    }
+  }
   
   private _getInstance() {
     this._instanceService
         .getOne(this._params.get('id'))
         .subscribe((instance) => {
-          this.instance = instance; 
+          this.instance = instance;
         });
-  } 
+  }
 }

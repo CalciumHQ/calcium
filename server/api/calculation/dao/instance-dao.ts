@@ -60,6 +60,19 @@ instanceSchema.static('saveInstance', (id:String, instance:Object):Promise<any> 
     });
 });
 
+instanceSchema.static('deleteInstance', (id:String):Promise<any> => {
+    return new Promise((resolve:Function, reject:Function) => {
+        let _query = { _id: id };
+
+        Instance
+          .remove(_query)
+          .exec((err) => {
+              err ? reject(err)
+                  : resolve(); 
+          });
+    });
+});
+
 let Instance = mongoose.model('Instance', instanceSchema);
 
 export default Instance;

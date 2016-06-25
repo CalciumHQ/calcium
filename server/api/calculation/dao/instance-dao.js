@@ -51,6 +51,17 @@ instance_model_1.default.static('saveInstance', function (id, instance) {
         });
     });
 });
+instance_model_1.default.static('deleteInstance', function (id) {
+    return new Promise(function (resolve, reject) {
+        var _query = { _id: id };
+        Instance
+            .remove(_query)
+            .exec(function (err) {
+            err ? reject(err)
+                : resolve();
+        });
+    });
+});
 var Instance = mongoose.model('Instance', instance_model_1.default);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Instance;

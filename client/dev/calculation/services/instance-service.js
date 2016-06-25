@@ -45,6 +45,11 @@ var InstanceService = (function () {
             .patch(InstanceService.ENDPOINT.replace(':id', id), stringified, { headers: headers })
             .map(function (r) { return r.json(); });
     };
+    InstanceService.prototype.deleteInstance = function (id) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http
+            .delete(InstanceService.ENDPOINT.replace(':id', id), { headers: headers });
+    };
     InstanceService.prototype.getTemplate = function (url) {
         return this._http
             .get(url)

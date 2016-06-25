@@ -59,6 +59,13 @@ export class InstanceService {
                .patch(InstanceService.ENDPOINT.replace(':id', id), stringified, { headers: headers })
                .map((r) => r.json());
   }
+
+  deleteInstance(id:string):Observable<any> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+
+    return this._http
+               .delete(InstanceService.ENDPOINT.replace(':id', id), { headers: headers });
+  }
   
   getTemplate(url:string):Observable<any> {
      
