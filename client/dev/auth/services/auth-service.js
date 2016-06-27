@@ -54,9 +54,10 @@ var AuthService = (function () {
         return this._http
             .post(AuthService.LOGIN_ENDPOINT, _dataStringified, { headers: headers })
             .map(function (r) { return r.json(); })
-            .do(function (r) { return _this.saveJwt(r); })
-            .map(function (r) { return _this._jwtHelper.decodeToken(r); })
-            .do(function (r) { return _this.currentUserSource.next(r); });
+            .do(function (r) { return _this.saveJwt(r.jwt); })
+            .map(function (r) { return _this._jwtHelper.decodeToken(r.jwt); })
+            .do(function (user) { return _this.currentUserSource.next(user); })
+            .catch(this.handleError);
     };
     AuthService.prototype.logout = function () {
         var _this = this;
@@ -75,6 +76,14 @@ var AuthService = (function () {
             .map(function (r) { return r.json(); })
             .catch(function (e, o) { return Observable_1.Observable.empty(); })
             .subscribe(function (r) { return _this.currentUserSource.next(r); });
+    };
+    AuthService.prototype.handleError = function (error) {
+        console.log(error);
+        var jsonErr = error.json();
+        var msg = (jsonErr.message) ? jsonErr.message :
+            jsonErr.status ? jsonErr.status + " - " + jsonErr.statusText : 'Server error';
+        console.error(msg);
+        return Observable_1.Observable.throw(msg);
     };
     AuthService.LOGIN_ENDPOINT = '/auth/login';
     AuthService.LOGOUT_ENDPOINT = '/auth/logout';

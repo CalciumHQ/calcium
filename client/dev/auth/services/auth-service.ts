@@ -79,9 +79,10 @@ export class AuthService {
     return this._http
                .post(AuthService.LOGIN_ENDPOINT, _dataStringified, { headers: headers})
                .map((r) => r.json())
-               .do((r) => this.saveJwt(r))
-               .map((r) => this._jwtHelper.decodeToken(r))
-               .do((r) => this.currentUserSource.next(r));
+               .do((r) => this.saveJwt(r.jwt))
+               .map((r) => this._jwtHelper.decodeToken(r.jwt))
+               .do((user) => this.currentUserSource.next(user))
+               .catch(this.handleError);
   }
   
   public logout():Observable<any> {
@@ -95,12 +96,22 @@ export class AuthService {
   }
   
   public checkCurrentUser() {
-  let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
 
     this._http
         .get(AuthService.USER_ENDPOINT, { headers: headers})
         .map((r) => r.json())
         .catch((e, o) => Observable.empty())
         .subscribe((r) => this.currentUserSource.next(r));
+  }
+
+  private handleError (error: any) {
+    console.log(error);
+    let jsonErr = error.json();
+    let msg = (jsonErr.message) ? jsonErr.message :
+      jsonErr.status ? `${jsonErr.status} - ${jsonErr.statusText}` : 'Server error';
+      
+    console.error(msg);
+    return Observable.throw(msg);
   }
 }

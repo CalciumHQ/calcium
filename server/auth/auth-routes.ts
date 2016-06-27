@@ -9,19 +9,13 @@ export class AuthRoutes {
     static init(router: express.Router) {
       router
         .route('/auth/signup') 
-        .post(passport.authenticate('local-signup', { session: false }), (req: express.Request, res: express.Response) => {
-            
-            res.json(req.user, 200);
-        });
+        .post(AuthController.register);
         
       router
         .route('/auth/login') 
-        .post(passport.authenticate('local-login', { session: false }), (req: express.Request, res: express.Response) => {
-            
-            res.json(req.user, 200);
-        });
+        .post(AuthController.login);
         
-      router
+      router 
         .route('/auth/logout')
         .get((req: express.Request, res: express.Response) => {
          

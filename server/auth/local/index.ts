@@ -44,17 +44,16 @@ export class LocalStrategy {
         passwordField: 'password' 
       }, 
       (email, password, done) => {
-        console.log(email, password); 
         UserDAO
           ['findOne']({ email: email })
           .then(user => {
             
             if (!user) {
-              return done(null, false);
+              return done(null, false, { message: 'The email you provided is not registered' }); 
             }
             
             if (!user.validPassword(password)) {
-              return done(null, false);
+              return done(null, false, { message: 'The password you entered is incorrect' });
             }
             
             let token = jwt.encode(user, this.SECRET);

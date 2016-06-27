@@ -34,14 +34,13 @@ var LocalStrategy = (function () {
             usernameField: 'email',
             passwordField: 'password'
         }, function (email, password, done) {
-            console.log(email, password);
             user_dao_1.default['findOne']({ email: email })
                 .then(function (user) {
                 if (!user) {
-                    return done(null, false);
+                    return done(null, false, { message: 'The email you provided is not registered' });
                 }
                 if (!user.validPassword(password)) {
-                    return done(null, false);
+                    return done(null, false, { message: 'The password you entered is incorrect' });
                 }
                 var token = jwt.encode(user, _this.SECRET);
                 return done(null, token);

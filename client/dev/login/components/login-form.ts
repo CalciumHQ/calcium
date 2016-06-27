@@ -23,6 +23,7 @@ import {AuthService} from '../../auth/services/auth-service';
 export class LoginForm {
   
   loginForm: ControlGroup;
+  formError: string;
   
   constructor(@Inject(FormBuilder) fb:FormBuilder, 
     @Inject(Router) private _router: Router, 
@@ -36,12 +37,18 @@ export class LoginForm {
   }
   
   public login(email: string, password: string) {
-        
+
+    this.formError = '';
+
+    if (!this.loginForm.valid) {
+
+      return;
+    }
+
     this._authService
         .login(this.loginForm.value.email, this.loginForm.value.password)
-        .subscribe((user) => {
-          
-          this._router.navigate(['Dashboard']);
-        });
+        .subscribe(
+          user => { this._router.navigate(['Dashboard']); },
+          message => { this.formError = message; });
   }
 }

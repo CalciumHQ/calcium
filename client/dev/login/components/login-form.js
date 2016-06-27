@@ -26,11 +26,13 @@ var LoginForm = (function () {
     }
     LoginForm.prototype.login = function (email, password) {
         var _this = this;
+        this.formError = '';
+        if (!this.loginForm.valid) {
+            return;
+        }
         this._authService
             .login(this.loginForm.value.email, this.loginForm.value.password)
-            .subscribe(function (user) {
-            _this._router.navigate(['Dashboard']);
-        });
+            .subscribe(function (user) { _this._router.navigate(['Dashboard']); }, function (message) { _this.formError = message; });
     };
     LoginForm = __decorate([
         core_1.Component({
