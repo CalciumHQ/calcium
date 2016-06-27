@@ -28,6 +28,7 @@ var LoginForm = (function () {
         var _this = this;
         this.formError = '';
         if (!this.loginForm.valid) {
+            this.formError = 'Please complete all fields';
             return;
         }
         this._authService

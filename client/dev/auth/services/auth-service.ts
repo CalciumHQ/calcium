@@ -106,7 +106,6 @@ export class AuthService {
   }
 
   private handleError (error: any) {
-    console.log(error);
     let jsonErr = error.json();
     let msg = (jsonErr.message) ? jsonErr.message :
       jsonErr.status ? `${jsonErr.status} - ${jsonErr.statusText}` : 'Server error';

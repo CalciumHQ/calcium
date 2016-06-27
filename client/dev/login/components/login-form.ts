@@ -42,6 +42,7 @@ export class LoginForm {
 
     if (!this.loginForm.valid) {
 
+      this.formError = 'Please complete all fields';
       return;
     }
 

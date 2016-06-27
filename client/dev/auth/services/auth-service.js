@@ -78,7 +78,6 @@ var AuthService = (function () {
             .subscribe(function (r) { return _this.currentUserSource.next(r); });
     };
     AuthService.prototype.handleError = function (error) {
-        console.log(error);
         var jsonErr = error.json();
         var msg = (jsonErr.message) ? jsonErr.message :
             jsonErr.status ? jsonErr.status + " - " + jsonErr.statusText : 'Server error';
