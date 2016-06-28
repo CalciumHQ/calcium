@@ -5,6 +5,9 @@ unit_coverage
 bower_components
 typings
 server/*.js
+server/*.js.map
+client/dev/*.js
+client/dev/*.js.map
 client/.tmp
 client/dist
 *.log
