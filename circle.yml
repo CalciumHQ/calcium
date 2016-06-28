@@ -22,7 +22,7 @@ dependencies:
     - npm install --only=dev
     - npm install --global typings
     - typings install
-    - npm run build-dist
+    - npm run build-dev
 
   override:
     - docker build -t $IMAGE_NAME:$CIRCLE_SHA1 .
