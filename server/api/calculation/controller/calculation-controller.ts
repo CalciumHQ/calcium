@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as Python from 'python-shell';
+var Python = require('../../../../node_modules/python-shell');
 
 export class CalculationController {
   
@@ -31,7 +31,7 @@ export class CalculationController {
             
           case 'error':
             console.error(`ERROR: ${m.message}`); 
-            res.json({ message: m.message }, 500);
+            res.json(500, { message: m.message });
             break;
             
           case 'log':

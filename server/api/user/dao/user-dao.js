@@ -39,7 +39,7 @@ user_model_1.default.static('saveUser', function (id, user) {
     });
 });
 user_model_1.default.static('generateHash', function (password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 });
 user_model_1.default.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);

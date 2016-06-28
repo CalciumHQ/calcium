@@ -1,5 +1,5 @@
 "use strict";
-var Python = require('python-shell');
+var Python = require('../../../../node_modules/python-shell');
 var CalculationController = (function () {
     function CalculationController() {
     }
@@ -22,7 +22,7 @@ var CalculationController = (function () {
                     break;
                 case 'error':
                     console.error("ERROR: " + m.message);
-                    res.json({ message: m.message }, 500);
+                    res.json(500, { message: m.message });
                     break;
                 case 'log':
                     console.log("LOG: " + JSON.stringify(m.data));

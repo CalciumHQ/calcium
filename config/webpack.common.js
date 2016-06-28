@@ -18,6 +18,7 @@ module.exports = {
     loaders: [
       {
         test: /\.ts$/,
+        exclude: helpers.root('server'),
         loader: 'ts'
       },
       {

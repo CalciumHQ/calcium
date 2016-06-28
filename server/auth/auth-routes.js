@@ -14,7 +14,7 @@ var AuthRoutes = (function () {
             .route('/auth/logout')
             .get(function (req, res) {
             req.logout();
-            res.json({}, 200);
+            res.json(200, {});
         });
     };
     return AuthRoutes;

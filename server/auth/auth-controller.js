@@ -20,10 +20,11 @@ var AuthController = (function () {
         })(req, res, next);
     };
     AuthController.error = function (res, message) {
-        return res.json({ message: message }, 401);
+        res.json();
+        return res.json(401, { message: message });
     };
     AuthController.success = function (req, res, next, user) {
-        return res.json({ jwt: user }, 200);
+        return res.json(200, { jwt: user });
     };
     return AuthController;
 }());

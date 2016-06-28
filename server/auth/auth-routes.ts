@@ -20,7 +20,7 @@ export class AuthRoutes {
         .get((req: express.Request, res: express.Response) => {
          
             req.logout();
-            res.json({}, 200);
+            res.json(200, {});
         });
     }
 }

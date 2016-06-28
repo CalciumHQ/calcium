@@ -3,11 +3,11 @@ import UserDAO from '../dao/user-dao';
 
 export class UserController {
   
-  static me(req: express.Request, res: express.Response):void {
+  static me(req: express.Request, res: express.Response) {
     
     if (!req.user) {
       
-      return res.json(null, 403);
+      return res.json(403, {});
     }
     
     res.json(req.user, 200);

@@ -10,13 +10,10 @@
     },
     "exclude": [
         "node_modules",
-        "typings",
-        "server",
         "test"
     ],
     "filesGlob": [
-      "**/*.ts",
-      "typings/main.d.ts",
-      "node_modules/angular2/typings/browser.d.ts"
+        "**/*.ts",
+        "typings/main.d.ts"
     ]
 }

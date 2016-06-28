@@ -45,8 +45,8 @@ userSchema.static('saveUser', (id:String, user:Object):Promise<any> => {
     });
 });
 
-userSchema.static('generateHash', (password:string):boolean => {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+userSchema.static('generateHash', (password:string):string => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 });
 
 userSchema.methods.validPassword = function(password) { 

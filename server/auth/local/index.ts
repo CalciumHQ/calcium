@@ -17,7 +17,7 @@ export class LocalStrategy {
       }, (req, email, password, done) => {
         
         UserDAO
-          ['findOne']({ email: email })
+          ['getOne']({ email: email })
           .then(user => {
             
             if (user) {
@@ -45,7 +45,7 @@ export class LocalStrategy {
       }, 
       (email, password, done) => {
         UserDAO
-          ['findOne']({ email: email })
+          ['getOne']({ email: email })
           .then(user => {
             
             if (!user) {

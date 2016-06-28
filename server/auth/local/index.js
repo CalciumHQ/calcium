@@ -13,7 +13,7 @@ var LocalStrategy = (function () {
             passwordField: 'password',
             passReqToCallback: true
         }, function (req, email, password, done) {
-            user_dao_1.default['findOne']({ email: email })
+            user_dao_1.default['getOne']({ email: email })
                 .then(function (user) {
                 if (user) {
                     return done(null, false);
@@ -34,7 +34,7 @@ var LocalStrategy = (function () {
             usernameField: 'email',
             passwordField: 'password'
         }, function (email, password, done) {
-            user_dao_1.default['findOne']({ email: email })
+            user_dao_1.default['getOne']({ email: email })
                 .then(function (user) {
                 if (!user) {
                     return done(null, false, { message: 'The email you provided is not registered' });

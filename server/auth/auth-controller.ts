@@ -5,7 +5,7 @@ import * as passport from 'passport';
 
 export class AuthController {
 
-  static register(req: express.Request, res: express.Response, next?: Function) {
+  static register(req: express.Request, res: express.Response, next?) {
     passport.authenticate('local-signup', (err, user, info) => {
       if (!user) {
         return AuthController.error(res, info.message);
@@ -15,7 +15,7 @@ export class AuthController {
     })(req, res, next);
   }
 
-  static login(req: express.Request, res: express.Response, next?: Function) {
+  static login(req: express.Request, res: express.Response, next?) {
     passport.authenticate('local-login', (err, user, info) => { 
       if (!user) {
         return AuthController.error(res, info.message);
@@ -26,10 +26,11 @@ export class AuthController {
   }
   
   static error(res: express.Response, message) {
-    return res.json({ message: message }, 401);
+    res.json()
+    return res.json(401, { message: message });
   }
 
   static success(req: express.Request, res: express.Response, next, user) { 
-    return res.json({ jwt: user }, 200);
+    return res.json(200, { jwt: user });
   }
 }
