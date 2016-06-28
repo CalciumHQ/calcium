@@ -7,7 +7,7 @@ var RoutesConfig = (function () {
     function RoutesConfig() {
     }
     RoutesConfig.init = function (application) {
-        var _clientFiles = (process.env.NODE_ENV === 'production') ? '/client/dist/' : '/client/.tmp/';
+        var _clientFiles = (process.env.NODE_ENV === 'development') ? '/client/.tmp/' : '/client/dist/';
         var _root = process.cwd();
         application.use(express.static(_root));
         application.use(express.static(_root + _clientFiles));
