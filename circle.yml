@@ -19,9 +19,9 @@ general:
 
 dependencies:
   pre:
-    - npm install --global gulp
     - npm install --only=dev
-    - node --version
+    - npm install --global typings
+    - typings install
     - npm run build-dist
 
   override:
