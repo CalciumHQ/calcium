@@ -33,7 +33,12 @@ make_task_def() {
         "entryPoint": [],
         "mountPoints": [],
         "name": "calcium-staging",
-        "environment": [],
+        "environment": [
+            {
+                "name": "NODE_ENV",
+                "value": "staging"
+            }
+        ],
         "links": [],
         "image": "674110226179.dkr.ecr.us-east-1.amazonaws.com/calcium/website:%s",
         "command": [],
