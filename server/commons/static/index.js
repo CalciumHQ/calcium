@@ -5,8 +5,9 @@ var StaticDispatcher = (function () {
     }
     StaticDispatcher.sendIndex = function (req, res) {
         var _root = process.cwd();
+        var _clientFiles = (process.env.NODE_ENV === 'development') ? '/client/.tmp/' : '/client/dist/';
         res.type('.html');
-        fs.createReadStream(_root + '/client/.tmp/index.html')
+        fs.createReadStream(_root + _clientFiles + 'index.html')
             .pipe(res);
     };
     return StaticDispatcher;
