@@ -20,3 +20,4 @@ var AuthRoutes = (function () {
     return AuthRoutes;
 }());
 exports.AuthRoutes = AuthRoutes;
+//# sourceMappingURL=auth-routes.js.map

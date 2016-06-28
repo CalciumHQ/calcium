@@ -34,3 +34,4 @@ var TemplateService = (function () {
     return TemplateService;
 }());
 exports.TemplateService = TemplateService;
+//# sourceMappingURL=template-service.js.map

@@ -17,3 +17,4 @@ var TemplateController = (function () {
     return TemplateController;
 }());
 exports.TemplateController = TemplateController;
+//# sourceMappingURL=template-controller.js.map

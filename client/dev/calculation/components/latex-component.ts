@@ -41,6 +41,6 @@ export class LatexComponent implements OnInit {
     }
     
     this._latexEl = newLatexEl;
-    MathJax.Hub.Typeset(this._latexEl);
+    MathJax.Hub.Typeset(this._latexEl, null);
   }
 }

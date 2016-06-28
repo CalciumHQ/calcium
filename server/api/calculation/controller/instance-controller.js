@@ -42,3 +42,4 @@ var InstanceController = (function () {
     return InstanceController;
 }());
 exports.InstanceController = InstanceController;
+//# sourceMappingURL=instance-controller.js.map

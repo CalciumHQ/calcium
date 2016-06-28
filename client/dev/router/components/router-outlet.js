@@ -57,3 +57,4 @@ var LoggedInRouterOutlet = (function (_super) {
     return LoggedInRouterOutlet;
 }(router_deprecated_1.RouterOutlet));
 exports.LoggedInRouterOutlet = LoggedInRouterOutlet;
+//# sourceMappingURL=router-outlet.js.map

@@ -7,7 +7,7 @@ import * as helmet from 'helmet';
 
 export class RoutesConfig {
     static init(application: express.Application):void {
-        let _clientFiles = (process.env.NODE_ENV === 'production') ? '/client/dist/' : '/client/dev/';
+        let _clientFiles = (process.env.NODE_ENV === 'production') ? '/client/dist/' : '/client/.tmp/';
         let _root = process.cwd();
 
         application.use(express.static(_root));

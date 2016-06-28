@@ -64,3 +64,4 @@ var InstanceService = (function () {
     return InstanceService;
 }());
 exports.InstanceService = InstanceService;
+//# sourceMappingURL=instance-service.js.map

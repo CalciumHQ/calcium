@@ -47,3 +47,4 @@ user_model_1.default.methods.validPassword = function (password) {
 var User = mongoose.model('User', user_model_1.default);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = User;
+//# sourceMappingURL=user-dao.js.map

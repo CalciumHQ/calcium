@@ -30,3 +30,4 @@ var schema = new mongoose.Schema({
 }, { minimize: false });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = schema;
+//# sourceMappingURL=instance-model.js.map

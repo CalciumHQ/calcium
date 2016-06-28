@@ -51,3 +51,4 @@ var CalculationController = (function () {
     return CalculationController;
 }());
 exports.CalculationController = CalculationController;
+//# sourceMappingURL=calculation-controller.js.map

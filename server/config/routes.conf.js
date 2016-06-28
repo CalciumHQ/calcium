@@ -7,7 +7,7 @@ var RoutesConfig = (function () {
     function RoutesConfig() {
     }
     RoutesConfig.init = function (application) {
-        var _clientFiles = (process.env.NODE_ENV === 'production') ? '/client/dist/' : '/client/dev/';
+        var _clientFiles = (process.env.NODE_ENV === 'production') ? '/client/dist/' : '/client/.tmp/';
         var _root = process.cwd();
         application.use(express.static(_root));
         application.use(express.static(_root + _clientFiles));
@@ -18,3 +18,4 @@ var RoutesConfig = (function () {
     return RoutesConfig;
 }());
 exports.RoutesConfig = RoutesConfig;
+//# sourceMappingURL=routes.conf.js.map

@@ -13,3 +13,4 @@ var AuthConfig = (function () {
     return AuthConfig;
 }());
 exports.AuthConfig = AuthConfig;
+//# sourceMappingURL=auth.conf.js.map

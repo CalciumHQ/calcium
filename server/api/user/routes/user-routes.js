@@ -14,3 +14,4 @@ var UserRoutes = (function () {
     return UserRoutes;
 }());
 exports.UserRoutes = UserRoutes;
+//# sourceMappingURL=user-routes.js.map

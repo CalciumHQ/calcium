@@ -65,3 +65,4 @@ instance_model_1.default.static('deleteInstance', function (id) {
 var Instance = mongoose.model('Instance', instance_model_1.default);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Instance;
+//# sourceMappingURL=instance-dao.js.map

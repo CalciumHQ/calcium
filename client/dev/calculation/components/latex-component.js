@@ -29,7 +29,7 @@ var LatexComponent = (function () {
             this._elementRef.nativeElement.appendChild(newLatexEl);
         }
         this._latexEl = newLatexEl;
-        MathJax.Hub.Typeset(this._latexEl);
+        MathJax.Hub.Typeset(this._latexEl, null);
     };
     LatexComponent = __decorate([
         core_1.Component({
@@ -41,3 +41,4 @@ var LatexComponent = (function () {
     return LatexComponent;
 }());
 exports.LatexComponent = LatexComponent;
+//# sourceMappingURL=latex-component.js.map

@@ -14,3 +14,4 @@ var TemplateRoutes = (function () {
     return TemplateRoutes;
 }());
 exports.TemplateRoutes = TemplateRoutes;
+//# sourceMappingURL=template-routes.js.map

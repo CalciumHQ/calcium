@@ -9,8 +9,10 @@
         "noImplicitAny": false
     },
     "exclude": [
-	    "node_modules",
-      "typings"
+        "node_modules",
+        "typings",
+        "server",
+        "test"
     ],
     "filesGlob": [
       "**/*.ts",

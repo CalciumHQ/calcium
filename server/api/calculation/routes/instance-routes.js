@@ -21,3 +21,4 @@ var InstanceRoutes = (function () {
     return InstanceRoutes;
 }());
 exports.InstanceRoutes = InstanceRoutes;
+//# sourceMappingURL=instance-routes.js.map

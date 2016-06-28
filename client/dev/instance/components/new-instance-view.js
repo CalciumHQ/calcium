@@ -60,3 +60,4 @@ var NewInstanceView = (function () {
     return NewInstanceView;
 }());
 exports.NewInstanceView = NewInstanceView;
+//# sourceMappingURL=new-instance-view.js.map

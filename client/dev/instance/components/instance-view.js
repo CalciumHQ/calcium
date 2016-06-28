@@ -67,3 +67,4 @@ var InstanceView = (function () {
     return InstanceView;
 }());
 exports.InstanceView = InstanceView;
+//# sourceMappingURL=instance-view.js.map
