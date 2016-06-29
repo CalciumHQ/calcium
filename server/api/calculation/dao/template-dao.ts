@@ -29,6 +29,21 @@ templateSchema.static('getOne', (params:Object):Promise<any> => {
     });
 });
 
+templateSchema.static('createTemplate', (template:Object):Promise<any> => {
+    return new Promise((resolve:Function, reject:Function) => {
+      if (!_.isObject(template)) {
+        return reject(new TypeError('Template is not a valid object.'));
+      }
+
+      var _template = new Template(template);
+
+      _template.save((err, saved) => {
+        err ? reject(err)
+            : resolve(saved);
+      });
+    });
+});
+
 let Template = mongoose.model('Template', templateSchema);
 
 export default Template;

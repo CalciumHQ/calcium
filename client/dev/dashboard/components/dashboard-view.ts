@@ -19,6 +19,7 @@ import {InstanceService} from '../../calculation/services/instance-service';
 export class DashboardView implements OnInit {
   
   public instances = []
+  public loading = true;
   
   constructor(@Inject(InstanceService) private _instanceService: InstanceService) {
     
@@ -33,6 +34,7 @@ export class DashboardView implements OnInit {
         .getAll()
         .subscribe((instances) => {
           this.instances = instances; 
+          this.loading = false;
         });
   }
 }

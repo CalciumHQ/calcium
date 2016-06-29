@@ -18,7 +18,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <table class="table">
+      <div *ngIf="loading" class="placeholder">
+        <p class="weak">Loading your calculations</p>
+      </div>
+
+      <div *ngIf="!loading && !instances.length" class="placeholder">
+        <p>You don't have any calculations yet.</p>
+        <p><a [routerLink]="['NewInstance']">Create one now</a></p>
+      </div>
+
+      <table *ngIf="!loading && instances.length" class="table">
         <thead>
           <tr>
             <td><strong>Name</strong></td>
