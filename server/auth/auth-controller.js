@@ -6,7 +6,7 @@ var AuthController = (function () {
     AuthController.register = function (req, res, next) {
         passport.authenticate('local-signup', function (err, user, info) {
             if (!user) {
-                return AuthController.error(res, info.message);
+                return AuthController.error(res, (info ? info.message : null));
             }
             AuthController.success(req, res, next, user);
         })(req, res, next);
@@ -14,13 +14,12 @@ var AuthController = (function () {
     AuthController.login = function (req, res, next) {
         passport.authenticate('local-login', function (err, user, info) {
             if (!user) {
-                return AuthController.error(res, info.message);
+                return AuthController.error(res, (info ? info.message : null));
             }
             AuthController.success(req, res, next, user);
         })(req, res, next);
     };
     AuthController.error = function (res, message) {
-        res.json();
         return res.json(401, { message: message });
     };
     AuthController.success = function (req, res, next, user) {

@@ -1,14 +1,16 @@
 "use strict";
 var mongoose = require('mongoose');
-var dbConst = require('../constants/db.json');
+var environment_1 = require('./environment');
 var DBConfig = (function () {
     function DBConfig() {
     }
     DBConfig.init = function () {
-        var URL = (process.env.NODE_ENV === 'production') ? process.env.MONGOHQ_URL
-            : dbConst.development;
-        mongoose.connect(URL);
+        mongoose.connect(environment_1.default.mongo.uri);
         mongoose.connection.on('error', console.error.bind(console, 'An error ocurred with the DB connection: '));
+        // Populate DB with sample data
+        if (environment_1.default.seedDB) {
+            require('./seed');
+        }
     };
     return DBConfig;
 }());

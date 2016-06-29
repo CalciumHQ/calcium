@@ -8,7 +8,7 @@ export class AuthController {
   static register(req: express.Request, res: express.Response, next?) {
     passport.authenticate('local-signup', (err, user, info) => {
       if (!user) {
-        return AuthController.error(res, info.message);
+        return AuthController.error(res, (info ? info.message : null));
       }
 
       AuthController.success(req, res, next, user)
@@ -18,7 +18,7 @@ export class AuthController {
   static login(req: express.Request, res: express.Response, next?) {
     passport.authenticate('local-login', (err, user, info) => { 
       if (!user) {
-        return AuthController.error(res, info.message);
+        return AuthController.error(res, (info ? info.message : null));
       }
 
       AuthController.success(req, res, next, user);
@@ -26,7 +26,6 @@ export class AuthController {
   }
   
   static error(res: express.Response, message) {
-    res.json()
     return res.json(401, { message: message });
   }
 

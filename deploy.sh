@@ -37,6 +37,10 @@ make_task_def() {
             {
                 "name": "NODE_ENV",
                 "value": "staging"
+            },
+            {
+                "name": "MONGOLAB_URI",
+                "value": "mongodb://root:password@ds023603.mlab.com:23603/calcium-development"
             }
         ],
         "links": [],

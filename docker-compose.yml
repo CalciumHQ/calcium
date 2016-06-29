@@ -4,3 +4,9 @@ web:
     - "80:8081"
   volumes:
     - .:/src
+  links:
+    - db
+  environment:
+    - NODE_ENV=local
+db:
+  image: mongo:3.0.2
