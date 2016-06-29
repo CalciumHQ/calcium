@@ -5,11 +5,12 @@ def Calculate(inputs):
   # Geometry
   b = inputs['b']
   d = inputs['d']
+  c = inputs['c']
   f_c = inputs['f_c']
   f_y = inputs['f_y']
 
   A_g = b * d
-  d_o = d - 30
+  d_o = d - c
   
   Ast = inputs['A_st']
   d_n = symbols('d_n')
@@ -48,7 +49,11 @@ def Calculate(inputs):
   
   # Sum moments to find the nominal moment strength
   M_u = T * (d_o - a/2)
-  phi_M_u = 0.9 * M_u
+
+  # Calculate and apply capacity reduction factor
+  k_uo = d_n / d_o 
+  phi = max(0.6, min(0.8, 1.19 - 13 * k_uo / 12))    # Table 2.2.2
+  phi_M_u = phi * M_u
   
   return ({
     'A_g': N(A_g),
@@ -58,5 +63,6 @@ def Calculate(inputs):
     'gamma': N(gamma),
     'T': N(T),
     'M_u': N(M_u),
+    'phi': N(phi),
     'phi_M_u': N(phi_M_u)
   })

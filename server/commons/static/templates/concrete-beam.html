@@ -14,6 +14,14 @@
       <span class="input-group-addon">mm</span>
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="">Cover</label>
+    <div class="input-group">
+      <input ngControl="c" type="number" placeholder="30" class="form-control">
+      <span class="input-group-addon">mm</span>
+    </div>
+  </div>
   
   <div class="form-group">
     <label for="">Concrete strength</label>
@@ -42,6 +50,6 @@
   <div class="form-group">
     <label>Moment capacity</label>
     <p><latex>M_u = {{ output.outputs.M_u / 1000000 | round:2 }} kNm</latex></p>
-    <p><latex>\phi M_u = {{ output.outputs.phi_M_u / 1000000 | round:2 }} kNm</latex></p>
+    <p><latex>\phi M_u = {{ output.outputs.phi_M_u / 1000000 | round:2 }} kNm</latex>, <latex>\phi = {{ output.outputs.phi | round:2 }}</latex></p>
   </div>
 </form>

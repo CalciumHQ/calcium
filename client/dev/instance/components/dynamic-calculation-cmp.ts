@@ -53,7 +53,7 @@ export default function CreateDynamicCalculation(template:string, instance: any,
       
       this.scratchpadForm
           .valueChanges
-          .debounceTime(400)
+          .debounceTime(300)
           .distinctUntilChanged()
           .subscribe(() => this.calculate());
       }

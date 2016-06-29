@@ -8,5 +8,7 @@ web:
     - db
   environment:
     - NODE_ENV=local
+  working_dir: /src
+  command: forever --watch --watchIgnore '!{server/**/*.js}' server/server.js
 db:
   image: mongo:3.0.2

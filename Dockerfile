@@ -7,6 +7,7 @@ RUN \
   apt-get update && \
   apt-get install -y ruby ruby-dev && \
   apt-get install -y python python-dev python-pip python-virtualenv && \
+  npm install forever -g && \
   pip install sympy
 
 # Add application files
@@ -17,4 +18,4 @@ EXPOSE 8081
 
 # Start the runtime
 WORKDIR "/src"
-CMD ["node", "server/server.js"]
+CMD ["forever", "server/server.js"]
